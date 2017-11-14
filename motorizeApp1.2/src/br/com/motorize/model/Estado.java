@@ -1,5 +1,7 @@
 package br.com.motorize.model;
 
+import com.google.gson.Gson;
+
 public class Estado {
 	private int id_estado;
 	private String estado;
@@ -31,6 +33,13 @@ public class Estado {
 	public Estado() {
 		super();
 	}
+	@Override
+	public String toString() {
+		return "Estado [id_estado=" + id_estado + ", estado=" + estado + ", sigla=" + sigla + "]";
+	}
 	
+	public String toJson() {
+		return new Gson().toJson(this);
+	}
 	
 }
