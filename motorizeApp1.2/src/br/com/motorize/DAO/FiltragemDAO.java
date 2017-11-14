@@ -21,7 +21,7 @@ public class FiltragemDAO implements FiltragemInterface{
 		String sqlQuery = "call buscar_marcas(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setString(1, tipo_veiculo);
-		ResultSet set = statement.executeQuery(sqlQuery);
+		ResultSet set = statement.executeQuery();
 		List<Veiculo> veiculos = new ArrayList<Veiculo>();
 		while (set.next()) {
 			Veiculo veiculo = new Veiculo();
@@ -56,7 +56,7 @@ public class FiltragemDAO implements FiltragemInterface{
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setString(1, veiculo.getMarca());
 		statement.setString(2, veiculo.getTipo_veiculo());
-		ResultSet set = statement.executeQuery(sqlQuery);
+		ResultSet set = statement.executeQuery();
 		List<Veiculo> veiculos = new ArrayList<Veiculo>();
 		
 		while (set.next()) {
@@ -72,12 +72,12 @@ public class FiltragemDAO implements FiltragemInterface{
 	@Override
 	public List<Veiculo> BuscarVersao(Veiculo veiculo,Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
-		String sqlQuery = "call buscar_modelos(?,?,?)";
+		String sqlQuery = "call buscar_versao(?,?,?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setString(1, veiculo.getMarca());
 		statement.setString(2, veiculo.getModelo());
 		statement.setString(3, veiculo.getTipo_veiculo());
-		ResultSet set = statement.executeQuery(sqlQuery);
+		ResultSet set = statement.executeQuery();
 		List<Veiculo> veiculos = new ArrayList<Veiculo>();
 		while (set.next()) {
 			Veiculo retorno = new Veiculo();
@@ -95,7 +95,7 @@ public class FiltragemDAO implements FiltragemInterface{
 		String sqlQuery = "call buscar_estado(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setInt(1, id_estado);
-		ResultSet set = statement.executeQuery(sqlQuery);
+		ResultSet set = statement.executeQuery();
 		Estado estado = new Estado();
 
 		while (set.next()) {
@@ -109,9 +109,10 @@ public class FiltragemDAO implements FiltragemInterface{
 
 	@Override
 	public Cidade BuscarCidade(int id_cidade,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
-		String sqlQuery = "call buscar_cidade";
+		String sqlQuery = "call buscar_cidade(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		ResultSet set = statement.executeQuery(sqlQuery);
+		statement.setInt(1, id_cidade);
+		ResultSet set = statement.executeQuery();
 		Cidade cidade = new Cidade();
 		while (set.next()) {
 			cidade.setId_estado(set.getInt("id_estado"));
@@ -123,9 +124,9 @@ public class FiltragemDAO implements FiltragemInterface{
 
 	@Override
 	public List<Estado> BuscarEstados(Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
-		String sqlQuery = "call buscar_estados ";
+		String sqlQuery = "call motorize.buscar_estados()";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		ResultSet set = statement.executeQuery(sqlQuery);
+		ResultSet set = statement.executeQuery();
 		List<Estado> estados = new ArrayList<Estado>();
 
 		while (set.next()) {
@@ -143,7 +144,7 @@ public class FiltragemDAO implements FiltragemInterface{
 		String sqlQuery = "call buscar_cidades(?) ";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setInt(1, id_estado);
-		ResultSet set = statement.executeQuery(sqlQuery);
+		ResultSet set = statement.executeQuery();
 		List<Cidade> cidades = new ArrayList<Cidade>();
 		while (set.next()) {
 			Cidade cidade = new Cidade();
