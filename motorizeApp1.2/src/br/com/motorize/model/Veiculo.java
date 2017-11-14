@@ -6,6 +6,8 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.google.gson.Gson;
+
 @XmlRootElement(name = "veiculo")
 public class Veiculo implements Serializable{
 
@@ -69,6 +71,14 @@ public class Veiculo implements Serializable{
 	public Veiculo() {
 		super();
 	}
+	@Override
+	public String toString() {
+		return "Veiculo [id_carro=" + id_carro + ", marca=" + marca + ", modelo=" + modelo + ", versao=" + versao
+				+ ", tipo_veiculo=" + tipo_veiculo + "]";
+	}
 	
+	public String toJson() {
+		return new Gson().toJson(this);
+	}
 	
 }
