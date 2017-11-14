@@ -60,6 +60,13 @@ public class Veiculo implements Serializable{
 	public void setTipo_veiculo(String tipo_veiculo) {
 		this.tipo_veiculo = tipo_veiculo;
 	}
+	/**
+	 * @param id_carro
+	 * @param marca
+	 * @param modelo
+	 * @param versao
+	 * @param tipo_veiculo
+	 */
 	public Veiculo(int id_carro, String marca, String modelo, String versao, String tipo_veiculo) {
 		super();
 		this.id_carro = id_carro;
