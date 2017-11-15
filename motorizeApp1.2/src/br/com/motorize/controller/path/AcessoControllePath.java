@@ -20,8 +20,8 @@ import br.com.motorize.utils.ConexaoUtil;
 public class AcessoControllePath {
 
 	@GET
-	@Path("/logar/{CPF}/{senha}")
-	private Response fullAccess(@PathParam("CPF") String CPF, @PathParam("senha") String senha)  {
+	@Path("/Acesso/{CPF}/{senha}")
+	private Response Acesso(@PathParam("CPF") String CPF, @PathParam("senha") String senha)  {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			Anunciante anunciante = new AcessoDAO().Acesso(CPF, senha, connection);
@@ -34,8 +34,8 @@ public class AcessoControllePath {
 	}
 
 	@GET
-	@Path("/login/{CPF}/{senha}")
-	private Anunciante logar(@PathParam("CPF") String CPF, @PathParam("senha") String senha) {
+	@Path("/Login/{CPF}/{senha}")
+	private Anunciante Login(@PathParam("CPF") String CPF, @PathParam("senha") String senha) {
 
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -48,8 +48,8 @@ public class AcessoControllePath {
 	}
 
 	@GET
-	@Path("/logout")
-	private Anunciante logout(String CPF) {
+	@Path("/Logout")
+	private Anunciante Logout(String CPF) {
 
 		try {
 			Connection connection = ConexaoUtil.getConnection();
