@@ -6,6 +6,8 @@ import java.sql.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.google.gson.Gson;
+
 
 @XmlRootElement(name = "anunciante")
 public class Anunciante implements Serializable{
@@ -144,7 +146,9 @@ public class Anunciante implements Serializable{
 		this.status = status;
 	}
 	
-	
+	public String toJson() {
+		return new Gson().toJson(this);
+	}
 
 	@Override
 	public String toString() {

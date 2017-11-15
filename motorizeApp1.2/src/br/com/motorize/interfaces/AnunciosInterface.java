@@ -29,7 +29,7 @@ public abstract interface AnunciosInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Anuncio BuscarAnuncioID(int id_anunciante, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	Anuncio BuscarAnuncioID(long id_anunciante, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -39,7 +39,7 @@ public abstract interface AnunciosInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Anuncio> BuscarAnunciosID(int id_anunciante, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Anuncio> BuscarAnunciosID(long id_anunciante, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	
 	/**
@@ -50,7 +50,7 @@ public abstract interface AnunciosInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Response DeletarAnuncio(int id_anunciante, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	Response DeletarAnuncio(long id_anunciante, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -61,6 +61,7 @@ public abstract interface AnunciosInterface {
 	 * @throws SQLException
 	 */
 	Anuncio UpdateAnuncio(Anuncio anuncio, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+
 
 
 }

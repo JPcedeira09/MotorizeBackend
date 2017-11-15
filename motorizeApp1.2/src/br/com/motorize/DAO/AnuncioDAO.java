@@ -44,11 +44,11 @@ public class AnuncioDAO implements AnunciosInterface{
 
 
 	@Override
-	public List<Anuncio> BuscarAnunciosID(int id_pessoa_fk, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public List<Anuncio> BuscarAnunciosID(long id_pessoa_fk, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 
 		String sqlQuery = "call buscar_meus_carros(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		statement.setInt(1, id_pessoa_fk);
+		statement.setLong(1, id_pessoa_fk);
 		ResultSet set = statement.executeQuery();
 		List<Anuncio> anuncios = new ArrayList<Anuncio>();
 		while(set.next()){
@@ -83,11 +83,10 @@ public class AnuncioDAO implements AnunciosInterface{
 	 * @params id_produto
 	 * @params connection
 	 */
-	public Anuncio BuscarAnuncioID(int id_produto, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public Anuncio BuscarAnuncioID(long id_produto, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 
 		String sqlQuery = "call buscar_anuncio('"+id_produto+"')";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		//statement.setInt(1, id_produto);
 		ResultSet set = statement.executeQuery(sqlQuery);
 		
 		Anuncio anuncio = new Anuncio();
@@ -116,11 +115,11 @@ public class AnuncioDAO implements AnunciosInterface{
 	}
 
 	@Override
-	public Response DeletarAnuncio(int id_anuncio, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public Response DeletarAnuncio(long id_anuncio, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 
 		String sqlQuery = "call deletar_anuncio(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		statement.setInt(1, id_anuncio);
+		statement.setLong(1, id_anuncio);
 		statement.execute(sqlQuery);
 
 		return Response.status(200).entity("Anuncio deletado com sucesso.").build();}
