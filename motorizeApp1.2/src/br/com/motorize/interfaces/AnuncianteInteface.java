@@ -15,7 +15,7 @@ public abstract interface AnuncianteInteface {
 
 	Anunciante BuscarAnunciante(String CPF, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
-	Response DeletarAnunciante(int id_anunciante, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	Response DeletarAnunciante(long id_anunciante, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	Anunciante UpdateAnunciante(Anunciante anunciante, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 

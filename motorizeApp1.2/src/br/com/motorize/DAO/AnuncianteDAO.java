@@ -40,12 +40,10 @@ public class AnuncianteDAO implements AnuncianteInteface{
 			throws SQLExceptions, ClassNotFoundException, SQLException {
 		Anunciante anunciante = new Anunciante();
 		try {
-			//TODO arrumar no banco o buscar_assinante e trocar ID_PESSOA pro CPF;
 			String sql = "call buscar_anunciante('"+CPF+"')";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet set = statement.executeQuery();
 			if (set.next()) {
-
 				anunciante = new Anunciante();
 				anunciante.setNome(set.getString("nome"));
 				anunciante.setCPF(set.getString("CPF"));
@@ -55,11 +53,9 @@ public class AnuncianteDAO implements AnuncianteInteface{
 				anunciante.setCelular(set.getString("celular"));
 				anunciante.setTipo_pessoa(set.getString("tipo_pessoa"));
 				anunciante.setid_pessoa(set.getInt("id_pessoa"));
-
 			}
 			return anunciante;
 		} catch (SQLException e) {
-
 			System.out.println("INFO: Problemas na busca do usuario...");
 			e.printStackTrace();
 			return null;
@@ -68,18 +64,16 @@ public class AnuncianteDAO implements AnuncianteInteface{
 
 
 	@Override
-	public Response DeletarAnunciante(int id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
-
+	public Response DeletarAnunciante(long id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String Query = "call deletar_anunciante(?)";
 		PreparedStatement statement = connection.prepareStatement(Query);
-		statement.setInt(1, id_pessoa);
+		statement.setLong(1, id_pessoa);
 		statement.executeQuery();
 		return  Response.status(200).entity("Anunciante deletado com sucesso.").build();	
 	}
 
 	@Override
 	public Anunciante UpdateAnunciante(Anunciante anunciante, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
-
 		String sql = "call update_anunciante(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setString(1, anunciante.getNome());
@@ -91,15 +85,12 @@ public class AnuncianteDAO implements AnuncianteInteface{
 		statement.setString(7, anunciante.getTipo_pessoa());
 		statement.setString(8, anunciante.getStatus());
 		statement.setInt(9, anunciante.getid_pessoa());
-
 		statement.executeQuery();
-
 		String sql2 = "call buscar_anunciante (?)";
 		PreparedStatement statement2 = connection.prepareStatement(sql2);
 		statement2.setInt(1, anunciante.getid_pessoa());
 		ResultSet set = statement2.executeQuery();
 		Anunciante novo_anunciante = new Anunciante();
-
 		if (set.next()) {
 			novo_anunciante.setid_pessoa(set.getInt("id_pessoa"));
 			novo_anunciante.setNome(set.getString("nome"));
