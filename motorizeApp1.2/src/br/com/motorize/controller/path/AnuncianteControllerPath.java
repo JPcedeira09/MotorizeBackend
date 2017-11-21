@@ -24,7 +24,7 @@ public class AnuncianteControllerPath {
 		return "<h1>Hello World</h1>";
 	}
 	
-	private Anunciante validarAnuncianteExistente(long id) throws ClassNotFoundException, SQLException {
+	public Anunciante validarAnuncianteExistente(long id) throws ClassNotFoundException, SQLException {
 		Connection connection = ConexaoUtil.getConnection();
 		String sql = "call buscar_anunciante (?)";
 		PreparedStatement statement2 = connection.prepareStatement(sql);

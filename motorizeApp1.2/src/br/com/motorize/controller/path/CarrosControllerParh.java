@@ -28,7 +28,7 @@ public class CarrosControllerParh {
 
 	@POST
 	@Path("/POST")
-	private Response adiciona(Anuncio anuncio) {
+	public Response adiciona(Anuncio anuncio) {
 		Connection connection;
 		try {
 			connection = ConexaoUtil.getConnection();
@@ -42,7 +42,7 @@ public class CarrosControllerParh {
 
 	@PUT
 	@Path("/UpdateAnuncio")
-	private Response UpdateAnuncio(Anuncio anuncio) {
+	public Response UpdateAnuncio(Anuncio anuncio) {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			new AnuncioDAO().UpdateAnuncio(anuncio, connection);
@@ -55,7 +55,7 @@ public class CarrosControllerParh {
 
 	@DELETE
 	@Path("/DeletarAnuncio/{id}")
-	private Response DeletarAnuncio(@PathParam("id") long id_anuncio) {
+	public Response DeletarAnuncio(@PathParam("id") long id_anuncio) {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			new AnuncioDAO().DeletarAnuncio(id_anuncio, connection);
@@ -68,7 +68,7 @@ public class CarrosControllerParh {
 
 	@GET
 	@Path("/BuscarAnuncio/{id}")
-	private Anuncio BuscarAnuncioID(@PathParam("id") long id) {
+	public Anuncio BuscarAnuncioID(@PathParam("id") long id) {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			Anuncio anuncio = new AnuncioDAO().BuscarAnuncioID(id, connection);
@@ -82,7 +82,7 @@ public class CarrosControllerParh {
 
 	/*	@GET
 	@Path("/anuncios")
-	private List<Anuncio> lista() {
+	public List<Anuncio> lista() {
 
 		List<Anuncio> anuncios;
 		try {
@@ -98,7 +98,7 @@ public class CarrosControllerParh {
 
 	@GET
 	@Path("/BuscarAnuncios/{id}")
-	private List<Anuncio> BuscarAnunciosID(@PathParam("id") long id_pessoa_fk) {
+	public List<Anuncio> BuscarAnunciosID(@PathParam("id") long id_pessoa_fk) {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			List<Anuncio> anuncios = new AnuncioDAO().BuscarAnunciosID(id_pessoa_fk, connection);
@@ -112,7 +112,7 @@ public class CarrosControllerParh {
 
 	/*	@GET
 	@Path("/buscarAnuncios/{id}")
-	private List<Anuncio> buscarAnuncios(@PathParam("id")long id_pessoa_fk) {
+	public List<Anuncio> buscarAnuncios(@PathParam("id")long id_pessoa_fk) {
 
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -126,7 +126,7 @@ public class CarrosControllerParh {
 
 	@GET
 	@Path("/BuscarTipoVeiculo")
-	private List<Veiculo> BuscarTipoVeiculo(Veiculo anuncio) {
+	public List<Veiculo> BuscarTipoVeiculo(Veiculo anuncio) {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			List<Veiculo> anuncios = new FiltragemDAO().BuscarTipo_Veiculo(connection);
@@ -139,7 +139,7 @@ public class CarrosControllerParh {
 
 	@GET
 	@Path("/BuscarMarcas")
-	private List<Veiculo> BuscarMarcas( String tipo_veiculo) {
+	public List<Veiculo> BuscarMarcas( String tipo_veiculo) {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			List<Veiculo> anuncios = new FiltragemDAO().BuscarMarcas(tipo_veiculo, connection);
@@ -152,7 +152,7 @@ public class CarrosControllerParh {
 
 	@GET	
 	@Path("/BuscarModelos")
-	private List<Veiculo> BuscarModelos(Veiculo veiculo) {
+	public List<Veiculo> BuscarModelos(Veiculo veiculo) {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			List<Veiculo> anuncios = new FiltragemDAO().BuscarModelos(veiculo, connection);
@@ -166,7 +166,7 @@ public class CarrosControllerParh {
 
 	@GET
 	@Path("/BuscarVersao")
-	private List<Veiculo> BuscarVersao(Veiculo veiculo) {
+	public List<Veiculo> BuscarVersao(Veiculo veiculo) {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			List<Veiculo> 	anuncios = new FiltragemDAO().BuscarVersao(veiculo, connection);
