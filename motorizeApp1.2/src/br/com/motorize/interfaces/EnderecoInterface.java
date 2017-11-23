@@ -3,10 +3,9 @@ package br.com.motorize.interfaces;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.ws.rs.core.Response;
-
 import br.com.motorize.exception.SQLExceptions;
 import br.com.motorize.model.Endereco;
+import br.com.motorize.model.GenericResponse;
 
 public interface EnderecoInterface {
 
@@ -19,7 +18,7 @@ public interface EnderecoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Response AdiconarEndereco(Endereco endereco, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	GenericResponse AdiconarEndereco(Endereco endereco, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -41,7 +40,7 @@ public interface EnderecoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Response DeletarEndereco(int id_pessoa_fk, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	GenericResponse DeletarEndereco(long id_pessoa_fk, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -52,6 +51,6 @@ public interface EnderecoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Endereco BuscarEndereco(int id_pessoa_fk, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	Endereco BuscarEndereco(long id_pessoa_fk, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 }

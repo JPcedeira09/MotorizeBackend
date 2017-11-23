@@ -5,11 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.ws.rs.core.Response;
-
 import br.com.motorize.exception.SQLExceptions;
 import br.com.motorize.interfaces.EnderecoInterface;
 import br.com.motorize.model.Endereco;
+import br.com.motorize.model.GenericResponse;
 
 public class EnderecoDAO implements EnderecoInterface{
 
@@ -23,8 +22,7 @@ public class EnderecoDAO implements EnderecoInterface{
 	 * @throws SQLException
 	 */
 	@Override
-	public Response AdiconarEndereco(Endereco endereco, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
-
+	public GenericResponse AdiconarEndereco(Endereco endereco, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call adicionar_endereco(?,?,?,?,?,?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setInt(1, endereco.getid_pessoa_fk());
@@ -34,8 +32,8 @@ public class EnderecoDAO implements EnderecoInterface{
 		statement.setString(5, endereco.getNumero());
 		statement.setString(6, endereco.getComplemento());
 		statement.executeQuery();
-		return Response.status(200).entity("INFO: endereco foi cadastrado com sucesso.").build();
-
+		GenericResponse response = new GenericResponse(true, "INFO:Criado com sucesso.", "none");
+		return response;
 	}
 
 	/**
@@ -49,7 +47,6 @@ public class EnderecoDAO implements EnderecoInterface{
 	 */
 	@Override
 	public Endereco UpdateEndereco(Endereco endereco, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
-
 		String sqlQuery = "call update_endereco(?,?,?,?,?,?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setInt(1, endereco.getid_pessoa_fk());
@@ -59,7 +56,6 @@ public class EnderecoDAO implements EnderecoInterface{
 		statement.setString(5, endereco.getNumero());
 		statement.setString(6, endereco.getComplemento());
 		statement.executeQuery();
-
 		String sqlQuery2 = "call buscarEndereco(?)";
 		PreparedStatement statement2 = connection.prepareStatement(sqlQuery2);
 		statement2.setInt(1, endereco.getid_pessoa_fk());
@@ -88,14 +84,15 @@ public class EnderecoDAO implements EnderecoInterface{
 	 * @throws SQLException
 	 */
 	@Override
-	public Response DeletarEndereco(int id_pessoa_fk, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public GenericResponse DeletarEndereco(long id_pessoa_fk, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call deletar_Endereco(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		statement.setInt(1, id_pessoa_fk);
+		statement.setLong(1, id_pessoa_fk);
 		statement.executeQuery();
-		return Response.status(200).entity("INFO: endereco apagado com sucesso.").build();
-
+		GenericResponse response = new GenericResponse(true, "INFO:Deletado com sucesso", "none");
+		return response;
 	}
+	
 	/**
 	 * 
 	 * @param id_pessoa_fk
@@ -106,10 +103,10 @@ public class EnderecoDAO implements EnderecoInterface{
 	 * @throws SQLException
 	 */
 	@Override
-	public Endereco BuscarEndereco(int id_pessoa_fk, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public Endereco BuscarEndereco(long id_pessoa_fk, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call buscarEndereco(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		statement.setInt(1, id_pessoa_fk);
+		statement.setLong(1, id_pessoa_fk);
 		ResultSet set = statement.executeQuery();
 		Endereco endereco = new Endereco();
 		while (set.next()) {
@@ -122,7 +119,6 @@ public class EnderecoDAO implements EnderecoInterface{
 			endereco.setCep(set.getString("CEP"));
 		}
 		return endereco;
-
 	}
 
 }

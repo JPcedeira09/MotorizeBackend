@@ -35,11 +35,17 @@ public class GenericResponse {
 	public void setErrorCode(String errorCode) {
 		this.errorCode = errorCode;
 	}
+	
+	public GenericResponse(boolean status, String message, String errorCode) {
+		super();
+		this.status = status;
+		this.message = message;
+		this.errorCode = errorCode;
+	}
 	@Override
 	public String toString() {
 		return "GenericResponse [status=" + status + ", message=" + message + ", errorCode=" + errorCode + "]";
 	}
-
 
     public String toJson() {
         return new Gson().toJson(this);

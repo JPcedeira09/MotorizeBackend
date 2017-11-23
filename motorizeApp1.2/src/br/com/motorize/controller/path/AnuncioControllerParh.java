@@ -24,11 +24,11 @@ import br.com.motorize.utils.ConexaoUtil;
 @Path("/carros")
 @Consumes("application/json")
 @Produces("application/json")
-public class CarrosControllerParh {
+public class AnuncioControllerParh {
 
 	@POST
-	@Path("/POST")
-	public Response adiciona(Anuncio anuncio) {
+	@Path("/AdicionarAnuncio")
+	public Response AdicionarAnuncio(Anuncio anuncio) {
 		Connection connection;
 		try {
 			connection = ConexaoUtil.getConnection();
@@ -80,22 +80,6 @@ public class CarrosControllerParh {
 		}
 	}
 
-	/*	@GET
-	@Path("/anuncios")
-	public List<Anuncio> lista() {
-
-		List<Anuncio> anuncios;
-		try {
-			anuncios = new FiltragemDAO()
-			return anuncios;
-
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-
-	}*/
-
 	@GET
 	@Path("/BuscarAnuncios/{id}")
 	public List<Anuncio> BuscarAnunciosID(@PathParam("id") long id_pessoa_fk) {
@@ -107,22 +91,7 @@ public class CarrosControllerParh {
 			e.printStackTrace();
 			return null;
 		}
-
 	}
-
-	/*	@GET
-	@Path("/buscarAnuncios/{id}")
-	public List<Anuncio> buscarAnuncios(@PathParam("id")long id_pessoa_fk) {
-
-		try {
-			Connection connection = ConexaoUtil.getConnection();
-			List<Anuncio> anuncios = new AnuncioDAO().(id_pessoa_fk, connection);
-			return anuncios;
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}*/
 
 	@GET
 	@Path("/BuscarTipoVeiculo")
