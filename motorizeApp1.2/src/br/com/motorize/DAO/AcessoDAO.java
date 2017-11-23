@@ -27,7 +27,7 @@ public class AcessoDAO implements AcessosInterface{
 
 			String query = "call login_base('"+CPF+"', '"+senha+"') ";
 			PreparedStatement statement = connection.prepareStatement(query);
-			ResultSet set = statement.executeQuery(query);
+			ResultSet set = statement.executeQuery();
 			Anunciante anunciante = new Anunciante();
 
 			while(set.next()){
@@ -44,7 +44,7 @@ public class AcessoDAO implements AcessosInterface{
 			}
 			String updateQuery = "call update_status_service_s('"+CPF+"')";
 			PreparedStatement statement2 = connection.prepareStatement(updateQuery);
-			statement2.executeQuery(updateQuery);
+			statement2.executeQuery();
 
 			Anunciante buscarAnuncianteAtual = buscaAnunciantePorID(CPF,connection);
 
@@ -70,13 +70,11 @@ public class AcessoDAO implements AcessosInterface{
 		if (buscarAnunciante == null || buscarAnunciante.getCPF() == "" ) {
 			return null;
 		}else {
-
 			String query = "call login_anunciante(?,?)";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, CPF);
 			statement.setString(2, senha);
-
-			ResultSet set = statement.executeQuery(query);
+			ResultSet set = statement.executeQuery();
 
 			Anunciante anunciante = new Anunciante();
 			Endereco endereco = new Endereco();
@@ -154,11 +152,9 @@ public class AcessoDAO implements AcessosInterface{
 				assinatura.setId_tipo_assinatura(set.getInt("id_assinatura"));
 				assinatura.setNome_assinatura(set.getString("nome_assinatura"));
 				assinatura.setValor(set.getInt("valor"));
-
 			}
 			return anunciante;
 		}
-
 	}
 
 
@@ -167,13 +163,12 @@ public class AcessoDAO implements AcessosInterface{
 	public Anunciante Logout(String CPF, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 
 		Anunciante buscarAnunciante = buscaAnunciantePorID(CPF,connection);
-
 		if (buscarAnunciante == null || buscarAnunciante.getCPF() == "" ) {
 			return null;
 		}else {
 			String updateQuery = "call upadate_status_service_N('"+CPF+"')";
 			PreparedStatement statement = connection.prepareStatement(updateQuery);
-			statement.executeUpdate(updateQuery);
+			statement.executeUpdate();
 			
 			return buscaAnunciantePorID(CPF,connection);
 		}
@@ -183,7 +178,7 @@ public class AcessoDAO implements AcessosInterface{
 
 		String sqlQuery = "SELECT * FROM anunciante WHERE CPF = '"+CPF+"'";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		ResultSet set = statement.executeQuery(sqlQuery);
+		ResultSet set = statement.executeQuery();
 		Anunciante anunciante = new Anunciante();
 
 		if (set.next()) {
