@@ -34,6 +34,7 @@ public class EnderecoControllePath {
 			return null;
 		}		
 	}
+	
 	@PUT
 	@Path("/UpdateEndereco")
 	public Endereco UpdateEndereco(Endereco endereco){
@@ -72,4 +73,5 @@ public class EnderecoControllePath {
 			return null;
 		}
 	}
+	
 }
