@@ -32,9 +32,11 @@ public class AcessoControllePath {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			Anunciante anunciante = new AcessoDAO().Acesso(CPF, senha, connection);
+			System.out.println("Usuario longando");
+			System.out.println(anunciante.toJson());
+
 			return Response.status(200).entity(anunciante.toJson()).build();
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
