@@ -25,16 +25,22 @@ public class EnderecoControllePath {
 	@POST
 	@Path("/AdiconarEndereco")
 	public Response AdiconarEndereco(Endereco endereco) {
+		Connection connection;
 		try {
-			Connection connection = ConexaoUtil.getConnection();
+			connection = ConexaoUtil.getConnection();
 			GenericResponse response = new EnderecoDAO().AdiconarEndereco(endereco, connection);
 			return Response.status(200).entity(response.toJson()).build();
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
-		}		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
-	
+
 	@PUT
 	@Path("/UpdateEndereco")
 	public Endereco UpdateEndereco(Endereco endereco){
@@ -42,7 +48,12 @@ public class EnderecoControllePath {
 			Connection connection = ConexaoUtil.getConnection();
 			Endereco retorno = new EnderecoDAO().UpdateEndereco(endereco, connection);
 			return retorno;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}	
@@ -55,12 +66,17 @@ public class EnderecoControllePath {
 			Connection connection = ConexaoUtil.getConnection();
 			GenericResponse response = new EnderecoDAO().DeletarEndereco(id_pessoa_fk, connection);
 			return Response.status(204).entity(response.toJson()).build();
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
 	}
-	
+
 	@GET
 	@Path("/BuscarEndereco/{id}")
 	public Endereco BuscarEndereco(long id_pessoa_fk)  {
@@ -68,10 +84,15 @@ public class EnderecoControllePath {
 			Connection connection = ConexaoUtil.getConnection();
 			Endereco retorno = new EnderecoDAO().BuscarEndereco(id_pessoa_fk, connection);
 			return retorno;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
 	}
-	
+
 }

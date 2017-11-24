@@ -2,7 +2,7 @@ package br.com.motorize.model;
 
 import java.io.InputStream;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,11 +18,7 @@ public class Anuncio implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@XmlAttribute(name = "id_produto")
-	private int id_produto;
-	@XmlAttribute(name = "id_carro_fk")
-	private int id_carro_fk;
-	@XmlAttribute(name = "id_pessoa_fk")
-	private int id_pessoa_fk;
+	private long id_produto;
 	@XmlAttribute(name = "preco")
 	private double preco;
 	@XmlAttribute(name = "data_postagem")
@@ -36,9 +32,9 @@ public class Anuncio implements Serializable{
 	@XmlAttribute(name = "blindagem")
 	private String blindagem;
 	@XmlAttribute(name = "kilometragem")
-	private int kilometragem;
+	private long kilometragem;
 	@XmlAttribute(name = "numero_portas")
-	private int numero_portas;
+	private long numero_portas;
 	@XmlAttribute(name = "tipo_necessidade")
 	private String tipo_necessidade;
 	@XmlAttribute(name = "codigo")
@@ -51,138 +47,98 @@ public class Anuncio implements Serializable{
 	private InputStream imagem_3;
 	@XmlAttribute(name = "imagem_4")
 	private InputStream imagem_4;
+	@XmlAttribute(name = "id_carro_fk")
+	private long id_carro_fk;
+	@XmlAttribute(name = "id_pessoa_fk")
+	private long id_pessoa_fk;
 
-	public int getId_produto() {
+	public long getId_produto() {
 		return id_produto;
 	}
 
-
-
-	public void setId_produto(int id_produto) {
+	public void setId_produto(long id_produto) {
 		this.id_produto = id_produto;
 	}
 
-
-
-	public int getId_carro_fk() {
+	public long getId_carro_fk() {
 		return id_carro_fk;
 	}
-
-
 
 	public void setId_carro_fk(int id_carro_fk) {
 		this.id_carro_fk = id_carro_fk;
 	}
 
-
-
-	public int getId_pessoa_fk() {
+	public long getId_pessoa_fk() {
 		return id_pessoa_fk;
 	}
-
-
 
 	public void setId_pessoa_fk(int id_pessoa_fk) {
 		this.id_pessoa_fk = id_pessoa_fk;
 	}
 
-
-
 	public double getPreco() {
 		return preco;
 	}
-
-
 
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 
-
-
 	public Date getData_postagem() {
 		return data_postagem;
 	}
-
-
 
 	public void setData_postagem(Date data_postagem) {
 		this.data_postagem = data_postagem;
 	}
 
-
-
 	public Date getAno_compra() {
 		return ano_compra;
 	}
-
-
 
 	public void setAno_compra(Date ano_compra) {
 		this.ano_compra = ano_compra;
 	}
 
-
-
 	public String getCor() {
 		return cor;
 	}
-
-
 
 	public void setCor(String cor) {
 		this.cor = cor;
 	}
 
-
-
 	public String getOpcional() {
 		return opcional;
 	}
-
-
 
 	public void setOpcional(String opcional) {
 		this.opcional = opcional;
 	}
 
-
-
 	public String getBlindagem() {
 		return blindagem;
 	}
-
-
 
 	public void setBlindagem(String blindagem) {
 		this.blindagem = blindagem;
 	}
 
-
-
-	public int getKilometragem() {
+	public long getKilometragem() {
 		return kilometragem;
 	}
 
-
-
-	public void setKilometragem(int kilometragem) {
+	public void setKilometragem(long kilometragem) {
 		this.kilometragem = kilometragem;
 	}
 
-
-
-	public int getNumero_portas() {
+	public long getNumero_portas() {
 		return numero_portas;
 	}
 
-
-
-	public void setNumero_portas(int numero_portas) {
+	public void setNumero_portas(long numero_portas) {
 		this.numero_portas = numero_portas;
 	}
-
-
 
 	public String getTipo_necessidade() {
 		return tipo_necessidade;
@@ -234,12 +190,13 @@ public class Anuncio implements Serializable{
 		this.imagem_4 = imagem_4;
 	}
 
-	public Anuncio( int id_carro_fk, int id_pessoa_fk, double preco, Date data_postagem, Date ano_compra,
-			String cor, String opcional, String blindagem, int kilometragem, int numero_portas, String tipo_necessidade,
-			String codigo, InputStream imagem_1, InputStream imagem_2, InputStream imagem_3, InputStream imagem_4) {
+
+	public Anuncio(long id_produto, double preco, Date data_postagem, Date ano_compra, String cor, String opcional,
+			String blindagem, long kilometragem, long numero_portas, String tipo_necessidade, String codigo,
+			InputStream imagem_1, InputStream imagem_2, InputStream imagem_3, InputStream imagem_4, long id_carro_fk,
+			long id_pessoa_fk) {
 		super();
-		this.id_carro_fk = id_carro_fk;
-		this.id_pessoa_fk = id_pessoa_fk;
+		this.id_produto = id_produto;
 		this.preco = preco;
 		this.data_postagem = data_postagem;
 		this.ano_compra = ano_compra;
@@ -254,12 +211,14 @@ public class Anuncio implements Serializable{
 		this.imagem_2 = imagem_2;
 		this.imagem_3 = imagem_3;
 		this.imagem_4 = imagem_4;
+		this.id_carro_fk = id_carro_fk;
+		this.id_pessoa_fk = id_pessoa_fk;
 	}
+
 	public Anuncio() {
 		super();
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "Anuncio [id_produto=" + id_produto + ", id_carro_fk=" + id_carro_fk + ", id_pessoa_fk=" + id_pessoa_fk
@@ -270,9 +229,8 @@ public class Anuncio implements Serializable{
 				+ imagem_4 + "]";
 	}
 
-
-
 	public String toJson() {
 		return new Gson().toJson(this);
 	}
+	
 }

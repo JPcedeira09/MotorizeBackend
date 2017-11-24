@@ -34,7 +34,12 @@ public class AnuncioControllerParh {
 			connection = ConexaoUtil.getConnection();
 			new AnuncioDAO().AdicionarAnuncio(anuncio, connection);
 			return Response.status(200).entity(anuncio.toJson()).build();
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -47,9 +52,14 @@ public class AnuncioControllerParh {
 			Connection connection = ConexaoUtil.getConnection();
 			new AnuncioDAO().UpdateAnuncio(anuncio, connection);
 			return Response.ok().build();
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.serverError().build();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
 		}
 	}
 
@@ -60,9 +70,14 @@ public class AnuncioControllerParh {
 			Connection connection = ConexaoUtil.getConnection();
 			new AnuncioDAO().DeletarAnuncio(id_anuncio, connection);
 			return Response.ok().build();
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.serverError().build();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
 		}
 	}
 
@@ -73,7 +88,11 @@ public class AnuncioControllerParh {
 			Connection connection = ConexaoUtil.getConnection();
 			Anuncio anuncio = new AnuncioDAO().BuscarAnuncioID(id, connection);
 			return anuncio;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
@@ -87,7 +106,12 @@ public class AnuncioControllerParh {
 			Connection connection = ConexaoUtil.getConnection();
 			List<Anuncio> anuncios = new AnuncioDAO().BuscarAnunciosID(id_pessoa_fk, connection);
 			return anuncios;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -100,7 +124,12 @@ public class AnuncioControllerParh {
 			Connection connection = ConexaoUtil.getConnection();
 			List<Veiculo> anuncios = new FiltragemDAO().BuscarTipo_Veiculo(connection);
 			return anuncios;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -113,7 +142,12 @@ public class AnuncioControllerParh {
 			Connection connection = ConexaoUtil.getConnection();
 			List<Veiculo> anuncios = new FiltragemDAO().BuscarMarcas(tipo_veiculo, connection);
 			return anuncios;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -126,8 +160,12 @@ public class AnuncioControllerParh {
 			Connection connection = ConexaoUtil.getConnection();
 			List<Veiculo> anuncios = new FiltragemDAO().BuscarModelos(veiculo, connection);
 			return anuncios;
-
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -140,10 +178,14 @@ public class AnuncioControllerParh {
 			Connection connection = ConexaoUtil.getConnection();
 			List<Veiculo> 	anuncios = new FiltragemDAO().BuscarVersao(veiculo, connection);
 			return anuncios;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
-
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

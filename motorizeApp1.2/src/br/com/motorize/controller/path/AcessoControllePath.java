@@ -34,9 +34,13 @@ public class AcessoControllePath {
 			Anunciante anunciante = new AcessoDAO().Acesso(CPF, senha, connection);
 			System.out.println("Usuario longando");
 			System.out.println(anunciante.toJson());
-
 			return Response.status(200).entity(anunciante.toJson()).build();
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -49,10 +53,15 @@ public class AcessoControllePath {
 			Connection connection = ConexaoUtil.getConnection();
 			Anunciante anunciante = new AcessoDAO().Login(CPF, senha, connection);
 			return anunciante;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
-		}		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}	
 	}
 
 	@GET
@@ -63,12 +72,15 @@ public class AcessoControllePath {
 			Connection connection = ConexaoUtil.getConnection();
 			Anunciante anunciante = new AcessoDAO().Logout(CPF , connection);
 			return anunciante;
-
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-
 	}
 
 }

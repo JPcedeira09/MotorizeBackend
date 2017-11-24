@@ -22,16 +22,16 @@ public class AnuncioDAO implements AnunciosInterface{
 		String sqlQuery = "call adicionaAnuncio(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 
-		statement.setInt(1, anuncio.getId_carro_fk());
-		statement.setInt(2, anuncio.getId_pessoa_fk());
+		statement.setLong(1, anuncio.getId_carro_fk());
+		statement.setLong(2, anuncio.getId_pessoa_fk());
 		statement.setDouble(3, anuncio.getPreco());
 		statement.setDate(4, anuncio.getData_postagem());
 		statement.setDate(5, anuncio.getAno_compra());
 		statement.setString(6, anuncio.getCor());
 		statement.setString(7, anuncio.getOpcional());
 		statement.setString(8, anuncio.getBlindagem());
-		statement.setInt(9, anuncio.getKilometragem());
-		statement.setInt(10, anuncio.getNumero_portas());
+		statement.setLong(9, anuncio.getKilometragem());
+		statement.setLong(10, anuncio.getNumero_portas());
 		statement.setString(11, anuncio.getTipo_necessidade());
 		statement.setString(12, anuncio.getCodigo());
 		statement.setBlob(13, (InputStream)anuncio.getImagem_1());
@@ -130,28 +130,28 @@ public class AnuncioDAO implements AnunciosInterface{
 		String sql = "call update_anuncio(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = connection.prepareStatement(sql);
 
-		statement.setInt(1, anuncio.getId_produto());
-		statement.setInt(2, anuncio.getId_pessoa_fk());
+		statement.setLong(1, anuncio.getId_produto());
+		statement.setLong(2, anuncio.getId_pessoa_fk());
 		statement.setDouble(3, anuncio.getPreco());
 		statement.setDate(4, anuncio.getData_postagem());
 		statement.setDate(5, anuncio.getAno_compra());
 		statement.setString(6, anuncio.getCor());
 		statement.setString(7, anuncio.getOpcional());
 		statement.setString(8, anuncio.getBlindagem());
-		statement.setInt(9, anuncio.getKilometragem());
-		statement.setInt(10, anuncio.getNumero_portas());
+		statement.setLong(9, anuncio.getKilometragem());
+		statement.setLong(10, anuncio.getNumero_portas());
 		statement.setString(11, anuncio.getTipo_necessidade());
 		statement.setString(12, anuncio.getCodigo());
 		statement.setBlob(13, anuncio.getImagem_1());
 		statement.setBlob(14, anuncio.getImagem_2());
 		statement.setBlob(15, anuncio.getImagem_3());
 		statement.setBlob(16, anuncio.getImagem_4());
-		statement.setInt(17, anuncio.getId_carro_fk());
+		statement.setLong(17, anuncio.getId_carro_fk());
 		statement.executeUpdate();
 
 		String sqlQuery = "call buscar_anuncio('"+anuncio.getId_produto()+"')";
 		PreparedStatement statement2 = connection.prepareStatement(sqlQuery);
-		statement.setInt(1, anuncio.getId_pessoa_fk());
+		statement.setLong(1, anuncio.getId_pessoa_fk());
 		ResultSet set = statement2.executeQuery();
 
 		Anuncio novo_anuncio = new Anuncio();
