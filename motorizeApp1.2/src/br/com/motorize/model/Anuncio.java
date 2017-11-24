@@ -215,6 +215,30 @@ public class Anuncio implements Serializable{
 		this.id_pessoa_fk = id_pessoa_fk;
 	}
 
+	
+	
+	public Anuncio(double preco, Date data_postagem, Date ano_compra, String cor, String opcional, String blindagem,
+			long kilometragem, long numero_portas, String tipo_necessidade, String codigo, InputStream imagem_1,
+			InputStream imagem_2, InputStream imagem_3, InputStream imagem_4, long id_carro_fk, long id_pessoa_fk) {
+		super();
+		this.preco = preco;
+		this.data_postagem = data_postagem;
+		this.ano_compra = ano_compra;
+		this.cor = cor;
+		this.opcional = opcional;
+		this.blindagem = blindagem;
+		this.kilometragem = kilometragem;
+		this.numero_portas = numero_portas;
+		this.tipo_necessidade = tipo_necessidade;
+		this.codigo = codigo;
+		this.imagem_1 = imagem_1;
+		this.imagem_2 = imagem_2;
+		this.imagem_3 = imagem_3;
+		this.imagem_4 = imagem_4;
+		this.id_carro_fk = id_carro_fk;
+		this.id_pessoa_fk = id_pessoa_fk;
+	}
+
 	public Anuncio() {
 		super();
 	}

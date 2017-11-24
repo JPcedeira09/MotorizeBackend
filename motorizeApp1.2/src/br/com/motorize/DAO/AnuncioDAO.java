@@ -2,6 +2,7 @@ package br.com.motorize.DAO;
 
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,8 +26,8 @@ public class AnuncioDAO implements AnunciosInterface{
 		statement.setLong(1, anuncio.getId_carro_fk());
 		statement.setLong(2, anuncio.getId_pessoa_fk());
 		statement.setDouble(3, anuncio.getPreco());
-		statement.setDate(4, anuncio.getData_postagem());
-		statement.setDate(5, anuncio.getAno_compra());
+		statement.setDate(4, (Date) anuncio.getData_postagem());
+		statement.setDate(5, (Date) anuncio.getAno_compra());
 		statement.setString(6, anuncio.getCor());
 		statement.setString(7, anuncio.getOpcional());
 		statement.setString(8, anuncio.getBlindagem());
@@ -133,8 +134,8 @@ public class AnuncioDAO implements AnunciosInterface{
 		statement.setLong(1, anuncio.getId_produto());
 		statement.setLong(2, anuncio.getId_pessoa_fk());
 		statement.setDouble(3, anuncio.getPreco());
-		statement.setDate(4, anuncio.getData_postagem());
-		statement.setDate(5, anuncio.getAno_compra());
+		statement.setDate(4, (Date) anuncio.getData_postagem());
+		statement.setDate(5, (Date) anuncio.getAno_compra());
 		statement.setString(6, anuncio.getCor());
 		statement.setString(7, anuncio.getOpcional());
 		statement.setString(8, anuncio.getBlindagem());

@@ -63,7 +63,7 @@ public abstract interface FiltragemInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Estado BuscarEstado(int id_estado,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	Estado BuscarEstado(long id_estado,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 
 	/**
@@ -74,7 +74,7 @@ public abstract interface FiltragemInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Cidade BuscarCidade(int id_cidade,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	Cidade BuscarCidade(long id_cidade,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -94,7 +94,7 @@ public abstract interface FiltragemInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Cidade> BuscarCidades(int id_estado,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Cidade> BuscarCidades(long id_estado,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -104,7 +104,7 @@ public abstract interface FiltragemInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Anuncio> OrdenarVeiculosPorOrdemNatural(Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Anuncio> OrdenarVeiculosPorOrdemNatural(String tipo_veiculo, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -115,7 +115,7 @@ public abstract interface FiltragemInterface {
 	 * @throws SQLException
 	 */
 
-	List<Anuncio> OrdenarVeiculosPorMenorValor(Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Anuncio> OrdenarVeiculosPorMenorValor(String tipo_veiculo, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 	/**
 	 * 
 	 * @param connection
@@ -124,7 +124,7 @@ public abstract interface FiltragemInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Anuncio> OrdenarVeiculosPorMaiorValor(Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Anuncio> OrdenarVeiculosPorMaiorValor(String tipo_veiculo, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 
 	/**
@@ -135,7 +135,7 @@ public abstract interface FiltragemInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Anuncio> OrdenarVeiculosPorMenorKilometragem(Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Anuncio> OrdenarVeiculosPorMenorKilometragem(String tipo_veiculo, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -145,7 +145,7 @@ public abstract interface FiltragemInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Anuncio> OrdenarVeiculosPorMaiorKilometragem(Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Anuncio> OrdenarVeiculosPorMaiorKilometragem(String tipo_veiculo, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -155,7 +155,7 @@ public abstract interface FiltragemInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Anuncio> OrdenarVeiculosPorOrdemAlfabeticaAZ(Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Anuncio> OrdenarVeiculosPorOrdemAlfabeticaAZ(String tipo_veiculo, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -165,7 +165,7 @@ public abstract interface FiltragemInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Anuncio> OrdenarVeiculosPorOrdemAlfabeticaZA(Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Anuncio> OrdenarVeiculosPorOrdemAlfabeticaZA(String tipo_veiculo, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -175,7 +175,7 @@ public abstract interface FiltragemInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Anuncio> OrdenarVeiculosPorMaisNovo(Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Anuncio> OrdenarVeiculosPorMaisNovo(String tipo_veiculo, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -185,7 +185,7 @@ public abstract interface FiltragemInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Anuncio> OrdenarVeiculosPorMaisVelho(Connection connection)
+	List<Anuncio> OrdenarVeiculosPorMaisVelho(String tipo_veiculo, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException;
 
 

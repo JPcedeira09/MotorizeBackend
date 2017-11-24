@@ -92,10 +92,10 @@ public class FiltragemDAO implements FiltragemInterface{
 	}
 
 	@Override
-	public Estado BuscarEstado(int id_estado,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public Estado BuscarEstado(long id_estado,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call buscar_estado(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		statement.setInt(1, id_estado);
+		statement.setLong(1, id_estado);
 		ResultSet set = statement.executeQuery();
 		Estado estado = new Estado();
 
@@ -109,10 +109,10 @@ public class FiltragemDAO implements FiltragemInterface{
 	}
 
 	@Override
-	public Cidade BuscarCidade(int id_cidade,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public Cidade BuscarCidade(long id_cidade,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call buscar_cidade(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		statement.setInt(1, id_cidade);
+		statement.setLong(1, id_cidade);
 		ResultSet set = statement.executeQuery();
 		Cidade cidade = new Cidade();
 		while (set.next()) {
@@ -141,10 +141,10 @@ public class FiltragemDAO implements FiltragemInterface{
 	}
 
 	@Override
-	public List<Cidade> BuscarCidades(int id_estado,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public List<Cidade> BuscarCidades(long id_estado,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call buscar_cidades(?) ";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		statement.setInt(1, id_estado);
+		statement.setLong(1, id_estado);
 		ResultSet set = statement.executeQuery();
 		List<Cidade> cidades = new ArrayList<Cidade>();
 		while (set.next()) {
@@ -157,13 +157,13 @@ public class FiltragemDAO implements FiltragemInterface{
 		return cidades;
 	}
 
-
 	// named procedure = 'buscar_anuncios_ordernar(?)'SELECT * FROM motorize.anuncio where id_carro_fk in (select id_carro from veiculo where tipo_veiculo = P_tipo_veiculo);
 	@Override
 	public List<Anuncio> OrdenarVeiculosPorOrdemNatural(String tipo_veiculo, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
-		String query = "call abuscar_anuncios_ordernar(?)";
+		String query = "SELECT * FROM motorize.anuncio where id_carro_fk in (select id_carro from veiculo where tipo_veiculo = ?) ";
 		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1,tipo_veiculo);
 		ResultSet set = statement.executeQuery();
 		List<Anuncio> anuncios = new ArrayList<Anuncio>();
 		while(set.next()) {
@@ -173,29 +173,31 @@ public class FiltragemDAO implements FiltragemInterface{
 			Date ano_compra = set.getDate("ano_compra");
 			String cor = set.getString("cor");
 			String opcional = set.getString("opcional");
-			String blindagem = set.getString("");
+			String blindagem = set.getString("blindagem");
 			long kilometragem = set.getLong("kilometragem");
 			long numero_portas = set.getLong("numero_portas");
 			String tipo_necessidade = set.getString("tipo_necessidade");
 			String codigo = set.getString("codigo");
-			InputStream imagem_1 = (InputStream) set.getBlob("imagem_1");
-			InputStream imagem_2 = (InputStream) set.getBlob("imagem_2");
-			InputStream imagem_3 = (InputStream) set.getBlob("imagem_3");
-			InputStream imagem_4 = (InputStream) set.getBlob("imagem_4");
+			InputStream imagem_1 = (InputStream) set.getBinaryStream("imagem_1");
+			InputStream imagem_2 = (InputStream) set.getBinaryStream("imagem_2");
+			InputStream imagem_3 = (InputStream) set.getBinaryStream("imagem_3");
+			InputStream imagem_4 = (InputStream) set.getBinaryStream("imagem_4");
 			long id_carro_fk = set.getLong("id_carro_fk");
 			long id_pessoa_fk= set.getLong("id_pessoa_fk");
 			Anuncio anuncio = new Anuncio(id_produto, preco, data_postagem, ano_compra, cor, opcional, blindagem, kilometragem, numero_portas, tipo_necessidade, codigo, imagem_1, imagem_2, imagem_3, imagem_4, id_carro_fk, id_pessoa_fk);
 			anuncios.add(anuncio);
+			System.out.println(anuncio.toJson());
 		}
-		return null;
+		return anuncios;
 	}
 
 	@Override
 	public List<Anuncio> OrdenarVeiculosPorMenorValor(String tipo_veiculo, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
 		// TODO FATORAR TODAS AS QUERIES NO BANCO DE ORDENAÇÃO 
-		String query = "call abuscar_anuncios_ordernar(?)";
+		String query = "SELECT * FROM motorize.anuncio where id_carro_fk in (select id_carro from veiculo where tipo_veiculo = ?) ";
 		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1,tipo_veiculo);
 		ResultSet set = statement.executeQuery();
 		List<Anuncio> anuncios = new ArrayList<Anuncio>();
 		while(set.next()) {
@@ -205,28 +207,31 @@ public class FiltragemDAO implements FiltragemInterface{
 			Date ano_compra = set.getDate("ano_compra");
 			String cor = set.getString("cor");
 			String opcional = set.getString("opcional");
-			String blindagem = set.getString("");
+			String blindagem = set.getString("blindagem");
 			long kilometragem = set.getLong("kilometragem");
 			long numero_portas = set.getLong("numero_portas");
 			String tipo_necessidade = set.getString("tipo_necessidade");
 			String codigo = set.getString("codigo");
-			InputStream imagem_1 = (InputStream) set.getBlob("imagem_1");
-			InputStream imagem_2 = (InputStream) set.getBlob("imagem_2");
-			InputStream imagem_3 = (InputStream) set.getBlob("imagem_3");
-			InputStream imagem_4 = (InputStream) set.getBlob("imagem_4");
+			InputStream imagem_1 = (InputStream) set.getBinaryStream("imagem_1");
+			InputStream imagem_2 = (InputStream) set.getBinaryStream("imagem_2");
+			InputStream imagem_3 = (InputStream) set.getBinaryStream("imagem_3");
+			InputStream imagem_4 = (InputStream) set.getBinaryStream("imagem_4");
 			long id_carro_fk = set.getLong("id_carro_fk");
 			long id_pessoa_fk= set.getLong("id_pessoa_fk");
 			Anuncio anuncio = new Anuncio(id_produto, preco, data_postagem, ano_compra, cor, opcional, blindagem, kilometragem, numero_portas, tipo_necessidade, codigo, imagem_1, imagem_2, imagem_3, imagem_4, id_carro_fk, id_pessoa_fk);
 			anuncios.add(anuncio);
+			System.out.println(anuncio.toJson());
 		}
-		return null;	}
+		return anuncios;
+		}
 
 	@Override
 	public List<Anuncio> OrdenarVeiculosPorMaiorValor(String tipo_veiculo, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
 		// TODO FATORAR TODAS AS QUERIES NO BANCO DE ORDENAÇÃO 
-		String query = "call abuscar_anuncios_ordernar(?)";
+		String query = "SELECT * FROM motorize.anuncio where id_carro_fk in (select id_carro from veiculo where tipo_veiculo = ?) ";
 		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1,tipo_veiculo);
 		ResultSet set = statement.executeQuery();
 		List<Anuncio> anuncios = new ArrayList<Anuncio>();
 		while(set.next()) {
@@ -236,28 +241,31 @@ public class FiltragemDAO implements FiltragemInterface{
 			Date ano_compra = set.getDate("ano_compra");
 			String cor = set.getString("cor");
 			String opcional = set.getString("opcional");
-			String blindagem = set.getString("");
+			String blindagem = set.getString("blindagem");
 			long kilometragem = set.getLong("kilometragem");
 			long numero_portas = set.getLong("numero_portas");
 			String tipo_necessidade = set.getString("tipo_necessidade");
 			String codigo = set.getString("codigo");
-			InputStream imagem_1 = (InputStream) set.getBlob("imagem_1");
-			InputStream imagem_2 = (InputStream) set.getBlob("imagem_2");
-			InputStream imagem_3 = (InputStream) set.getBlob("imagem_3");
-			InputStream imagem_4 = (InputStream) set.getBlob("imagem_4");
+			InputStream imagem_1 = (InputStream) set.getBinaryStream("imagem_1");
+			InputStream imagem_2 = (InputStream) set.getBinaryStream("imagem_2");
+			InputStream imagem_3 = (InputStream) set.getBinaryStream("imagem_3");
+			InputStream imagem_4 = (InputStream) set.getBinaryStream("imagem_4");
 			long id_carro_fk = set.getLong("id_carro_fk");
 			long id_pessoa_fk= set.getLong("id_pessoa_fk");
 			Anuncio anuncio = new Anuncio(id_produto, preco, data_postagem, ano_compra, cor, opcional, blindagem, kilometragem, numero_portas, tipo_necessidade, codigo, imagem_1, imagem_2, imagem_3, imagem_4, id_carro_fk, id_pessoa_fk);
 			anuncios.add(anuncio);
+			System.out.println(anuncio.toJson());
 		}
-		return null;	}
+		return anuncios;
+		}
 
 	@Override
 	public List<Anuncio> OrdenarVeiculosPorMenorKilometragem(String tipo_veiculo, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
 		// TODO FATORAR TODAS AS QUERIES NO BANCO DE ORDENAÇÃO 
-		String query = "call abuscar_anuncios_ordernar(?)";
+		String query = "SELECT * FROM motorize.anuncio where id_carro_fk in (select id_carro from veiculo where tipo_veiculo = ?) ";
 		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1,tipo_veiculo);
 		ResultSet set = statement.executeQuery();
 		List<Anuncio> anuncios = new ArrayList<Anuncio>();
 		while(set.next()) {
@@ -267,28 +275,31 @@ public class FiltragemDAO implements FiltragemInterface{
 			Date ano_compra = set.getDate("ano_compra");
 			String cor = set.getString("cor");
 			String opcional = set.getString("opcional");
-			String blindagem = set.getString("");
+			String blindagem = set.getString("blindagem");
 			long kilometragem = set.getLong("kilometragem");
 			long numero_portas = set.getLong("numero_portas");
 			String tipo_necessidade = set.getString("tipo_necessidade");
 			String codigo = set.getString("codigo");
-			InputStream imagem_1 = (InputStream) set.getBlob("imagem_1");
-			InputStream imagem_2 = (InputStream) set.getBlob("imagem_2");
-			InputStream imagem_3 = (InputStream) set.getBlob("imagem_3");
-			InputStream imagem_4 = (InputStream) set.getBlob("imagem_4");
+			InputStream imagem_1 = (InputStream) set.getBinaryStream("imagem_1");
+			InputStream imagem_2 = (InputStream) set.getBinaryStream("imagem_2");
+			InputStream imagem_3 = (InputStream) set.getBinaryStream("imagem_3");
+			InputStream imagem_4 = (InputStream) set.getBinaryStream("imagem_4");
 			long id_carro_fk = set.getLong("id_carro_fk");
 			long id_pessoa_fk= set.getLong("id_pessoa_fk");
 			Anuncio anuncio = new Anuncio(id_produto, preco, data_postagem, ano_compra, cor, opcional, blindagem, kilometragem, numero_portas, tipo_necessidade, codigo, imagem_1, imagem_2, imagem_3, imagem_4, id_carro_fk, id_pessoa_fk);
 			anuncios.add(anuncio);
+			System.out.println(anuncio.toJson());
 		}
-		return null;	}
+		return anuncios;
+		}
 
 	@Override
 	public List<Anuncio> OrdenarVeiculosPorMaiorKilometragem(String tipo_veiculo, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
 		// TODO FATORAR TODAS AS QUERIES NO BANCO DE ORDENAÇÃO 
-		String query = "call abuscar_anuncios_ordernar(?)";
+		String query = "SELECT * FROM motorize.anuncio where id_carro_fk in (select id_carro from veiculo where tipo_veiculo = ?) ";
 		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1,tipo_veiculo);
 		ResultSet set = statement.executeQuery();
 		List<Anuncio> anuncios = new ArrayList<Anuncio>();
 		while(set.next()) {
@@ -298,28 +309,31 @@ public class FiltragemDAO implements FiltragemInterface{
 			Date ano_compra = set.getDate("ano_compra");
 			String cor = set.getString("cor");
 			String opcional = set.getString("opcional");
-			String blindagem = set.getString("");
+			String blindagem = set.getString("blindagem");
 			long kilometragem = set.getLong("kilometragem");
 			long numero_portas = set.getLong("numero_portas");
 			String tipo_necessidade = set.getString("tipo_necessidade");
 			String codigo = set.getString("codigo");
-			InputStream imagem_1 = (InputStream) set.getBlob("imagem_1");
-			InputStream imagem_2 = (InputStream) set.getBlob("imagem_2");
-			InputStream imagem_3 = (InputStream) set.getBlob("imagem_3");
-			InputStream imagem_4 = (InputStream) set.getBlob("imagem_4");
+			InputStream imagem_1 = (InputStream) set.getBinaryStream("imagem_1");
+			InputStream imagem_2 = (InputStream) set.getBinaryStream("imagem_2");
+			InputStream imagem_3 = (InputStream) set.getBinaryStream("imagem_3");
+			InputStream imagem_4 = (InputStream) set.getBinaryStream("imagem_4");
 			long id_carro_fk = set.getLong("id_carro_fk");
 			long id_pessoa_fk= set.getLong("id_pessoa_fk");
 			Anuncio anuncio = new Anuncio(id_produto, preco, data_postagem, ano_compra, cor, opcional, blindagem, kilometragem, numero_portas, tipo_necessidade, codigo, imagem_1, imagem_2, imagem_3, imagem_4, id_carro_fk, id_pessoa_fk);
 			anuncios.add(anuncio);
+			System.out.println(anuncio.toJson());
 		}
-		return null;	}
+		return anuncios;
+		}
 
 	@Override
 	public List<Anuncio> OrdenarVeiculosPorOrdemAlfabeticaAZ(String tipo_veiculo, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		String query = "call abuscar_anuncios_ordernar(?)";
+		String query = "SELECT * FROM motorize.anuncio where id_carro_fk in (select id_carro from veiculo where tipo_veiculo = ?) ";
 		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1,tipo_veiculo);
 		ResultSet set = statement.executeQuery();
 		List<Anuncio> anuncios = new ArrayList<Anuncio>();
 		while(set.next()) {
@@ -329,28 +343,31 @@ public class FiltragemDAO implements FiltragemInterface{
 			Date ano_compra = set.getDate("ano_compra");
 			String cor = set.getString("cor");
 			String opcional = set.getString("opcional");
-			String blindagem = set.getString("");
+			String blindagem = set.getString("blindagem");
 			long kilometragem = set.getLong("kilometragem");
 			long numero_portas = set.getLong("numero_portas");
 			String tipo_necessidade = set.getString("tipo_necessidade");
 			String codigo = set.getString("codigo");
-			InputStream imagem_1 = (InputStream) set.getBlob("imagem_1");
-			InputStream imagem_2 = (InputStream) set.getBlob("imagem_2");
-			InputStream imagem_3 = (InputStream) set.getBlob("imagem_3");
-			InputStream imagem_4 = (InputStream) set.getBlob("imagem_4");
+			InputStream imagem_1 = (InputStream) set.getBinaryStream("imagem_1");
+			InputStream imagem_2 = (InputStream) set.getBinaryStream("imagem_2");
+			InputStream imagem_3 = (InputStream) set.getBinaryStream("imagem_3");
+			InputStream imagem_4 = (InputStream) set.getBinaryStream("imagem_4");
 			long id_carro_fk = set.getLong("id_carro_fk");
 			long id_pessoa_fk= set.getLong("id_pessoa_fk");
 			Anuncio anuncio = new Anuncio(id_produto, preco, data_postagem, ano_compra, cor, opcional, blindagem, kilometragem, numero_portas, tipo_necessidade, codigo, imagem_1, imagem_2, imagem_3, imagem_4, id_carro_fk, id_pessoa_fk);
 			anuncios.add(anuncio);
+			System.out.println(anuncio.toJson());
 		}
-		return null;	}
+		return anuncios;
+		}
 
 	@Override
 	public List<Anuncio> OrdenarVeiculosPorOrdemAlfabeticaZA(String tipo_veiculo, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		String query = "call abuscar_anuncios_ordernar(?)";
+		String query = "SELECT * FROM motorize.anuncio where id_carro_fk in (select id_carro from veiculo where tipo_veiculo = ?) ";
 		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1,tipo_veiculo);
 		ResultSet set = statement.executeQuery();
 		List<Anuncio> anuncios = new ArrayList<Anuncio>();
 		while(set.next()) {
@@ -360,28 +377,31 @@ public class FiltragemDAO implements FiltragemInterface{
 			Date ano_compra = set.getDate("ano_compra");
 			String cor = set.getString("cor");
 			String opcional = set.getString("opcional");
-			String blindagem = set.getString("");
+			String blindagem = set.getString("blindagem");
 			long kilometragem = set.getLong("kilometragem");
 			long numero_portas = set.getLong("numero_portas");
 			String tipo_necessidade = set.getString("tipo_necessidade");
 			String codigo = set.getString("codigo");
-			InputStream imagem_1 = (InputStream) set.getBlob("imagem_1");
-			InputStream imagem_2 = (InputStream) set.getBlob("imagem_2");
-			InputStream imagem_3 = (InputStream) set.getBlob("imagem_3");
-			InputStream imagem_4 = (InputStream) set.getBlob("imagem_4");
+			InputStream imagem_1 = (InputStream) set.getBinaryStream("imagem_1");
+			InputStream imagem_2 = (InputStream) set.getBinaryStream("imagem_2");
+			InputStream imagem_3 = (InputStream) set.getBinaryStream("imagem_3");
+			InputStream imagem_4 = (InputStream) set.getBinaryStream("imagem_4");
 			long id_carro_fk = set.getLong("id_carro_fk");
 			long id_pessoa_fk= set.getLong("id_pessoa_fk");
 			Anuncio anuncio = new Anuncio(id_produto, preco, data_postagem, ano_compra, cor, opcional, blindagem, kilometragem, numero_portas, tipo_necessidade, codigo, imagem_1, imagem_2, imagem_3, imagem_4, id_carro_fk, id_pessoa_fk);
 			anuncios.add(anuncio);
+			System.out.println(anuncio.toJson());
 		}
-		return null;	}
+		return anuncios;
+		}
 
 	@Override
 	public List<Anuncio> OrdenarVeiculosPorMaisNovo(String tipo_veiculo, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		String query = "call abuscar_anuncios_ordernar(?)";
+		String query = "SELECT * FROM motorize.anuncio where id_carro_fk in (select id_carro from veiculo where tipo_veiculo = ?) ";
 		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1,tipo_veiculo);
 		ResultSet set = statement.executeQuery();
 		List<Anuncio> anuncios = new ArrayList<Anuncio>();
 		while(set.next()) {
@@ -391,28 +411,31 @@ public class FiltragemDAO implements FiltragemInterface{
 			Date ano_compra = set.getDate("ano_compra");
 			String cor = set.getString("cor");
 			String opcional = set.getString("opcional");
-			String blindagem = set.getString("");
+			String blindagem = set.getString("blindagem");
 			long kilometragem = set.getLong("kilometragem");
 			long numero_portas = set.getLong("numero_portas");
 			String tipo_necessidade = set.getString("tipo_necessidade");
 			String codigo = set.getString("codigo");
-			InputStream imagem_1 = (InputStream) set.getBlob("imagem_1");
-			InputStream imagem_2 = (InputStream) set.getBlob("imagem_2");
-			InputStream imagem_3 = (InputStream) set.getBlob("imagem_3");
-			InputStream imagem_4 = (InputStream) set.getBlob("imagem_4");
+			InputStream imagem_1 = (InputStream) set.getBinaryStream("imagem_1");
+			InputStream imagem_2 = (InputStream) set.getBinaryStream("imagem_2");
+			InputStream imagem_3 = (InputStream) set.getBinaryStream("imagem_3");
+			InputStream imagem_4 = (InputStream) set.getBinaryStream("imagem_4");
 			long id_carro_fk = set.getLong("id_carro_fk");
 			long id_pessoa_fk= set.getLong("id_pessoa_fk");
 			Anuncio anuncio = new Anuncio(id_produto, preco, data_postagem, ano_compra, cor, opcional, blindagem, kilometragem, numero_portas, tipo_necessidade, codigo, imagem_1, imagem_2, imagem_3, imagem_4, id_carro_fk, id_pessoa_fk);
 			anuncios.add(anuncio);
+			System.out.println(anuncio.toJson());
 		}
-		return null;	}
+		return anuncios;
+		}
 
 	@Override
 	public List<Anuncio> OrdenarVeiculosPorMaisVelho(String tipo_veiculo, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		String query = "call abuscar_anuncios_ordernar(?)";
+		String query = "SELECT * FROM motorize.anuncio where id_carro_fk in (select id_carro from veiculo where tipo_veiculo = ?) ";
 		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1,tipo_veiculo);
 		ResultSet set = statement.executeQuery();
 		List<Anuncio> anuncios = new ArrayList<Anuncio>();
 		while(set.next()) {
@@ -422,21 +445,23 @@ public class FiltragemDAO implements FiltragemInterface{
 			Date ano_compra = set.getDate("ano_compra");
 			String cor = set.getString("cor");
 			String opcional = set.getString("opcional");
-			String blindagem = set.getString("");
+			String blindagem = set.getString("blindagem");
 			long kilometragem = set.getLong("kilometragem");
 			long numero_portas = set.getLong("numero_portas");
 			String tipo_necessidade = set.getString("tipo_necessidade");
 			String codigo = set.getString("codigo");
-			InputStream imagem_1 = (InputStream) set.getBlob("imagem_1");
-			InputStream imagem_2 = (InputStream) set.getBlob("imagem_2");
-			InputStream imagem_3 = (InputStream) set.getBlob("imagem_3");
-			InputStream imagem_4 = (InputStream) set.getBlob("imagem_4");
+			InputStream imagem_1 = (InputStream) set.getBinaryStream("imagem_1");
+			InputStream imagem_2 = (InputStream) set.getBinaryStream("imagem_2");
+			InputStream imagem_3 = (InputStream) set.getBinaryStream("imagem_3");
+			InputStream imagem_4 = (InputStream) set.getBinaryStream("imagem_4");
 			long id_carro_fk = set.getLong("id_carro_fk");
 			long id_pessoa_fk= set.getLong("id_pessoa_fk");
 			Anuncio anuncio = new Anuncio(id_produto, preco, data_postagem, ano_compra, cor, opcional, blindagem, kilometragem, numero_portas, tipo_necessidade, codigo, imagem_1, imagem_2, imagem_3, imagem_4, id_carro_fk, id_pessoa_fk);
 			anuncios.add(anuncio);
+			System.out.println(anuncio.toJson());
 		}
-		return null;	}
+		return anuncios;	
+		}
 
 
 }

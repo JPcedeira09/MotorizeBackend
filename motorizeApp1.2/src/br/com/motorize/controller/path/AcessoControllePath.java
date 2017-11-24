@@ -19,7 +19,6 @@ import br.com.motorize.utils.ConexaoUtil;
 @Consumes("application/json")
 public class AcessoControllePath {
 
-	
 	@GET
 	@Path("/teste")
 	public Response teste()  {
@@ -65,9 +64,8 @@ public class AcessoControllePath {
 	}
 
 	@GET
-	@Path("/Logout")
-	public Anunciante Logout(String CPF) {
-
+	@Path("/Logou/{CPF}")
+	public Anunciante Logout(@PathParam("CPF")String CPF) {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			Anunciante anunciante = new AcessoDAO().Logout(CPF , connection);

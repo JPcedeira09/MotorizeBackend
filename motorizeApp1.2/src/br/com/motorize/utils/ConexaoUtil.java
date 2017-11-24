@@ -27,7 +27,8 @@ public class ConexaoUtil  {
 		 * */
 		public static Connection getConnection() throws SQLException, ClassNotFoundException {
 			Class.forName("com.mysql.jdbc.Driver");
-			return DriverManager.getConnection("jdbc:mysql://localhost:3306/motorize", "root", "");		}
+			//jpmysql09@
+			return DriverManager.getConnection("jdbc:mysql://localhost:3306/motorize", "root", "jpmysql09@");		}
 		//Jpmysql09
 		
 		public static void main(String[] args) {

@@ -51,10 +51,9 @@ public class AnuncioDAOTest {
 		FileInputStream fileInp3 = new FileInputStream(imagem_3);
 		FileInputStream fileInp4 = new FileInputStream(imagem_4);
 
-		anucioDAO = new AnuncioDAO();
-		anuncio1 = new Anuncio(4, 1, 20000.50, dataPost, ano_compra, "azul", "sem opcionais", "Tipo A4", 90000 ,4, "nenhuma", "codigoTest1", fileInp1, fileInp2, fileInp3, fileInp4);
-		anuncio2 = new Anuncio(2, 1, 23000.50, dataPost, ano_compra, "azul", "sem opcionais", "Tipo A1", 90500 ,4, "nenhuma", "codigoTest2", fileInp1, fileInp2, fileInp3, fileInp4);
-		anuncio3 = new Anuncio(70, 1, 27000.50, dataPost, ano_compra, "azul", "sem opcionais", "sem", 96000 ,4, "nenhuma", "codigoTest3", fileInp1, fileInp2, fileInp3, fileInp4);
+		anuncio1 = new Anuncio(20000.50, dataPost, ano_compra, "azul", "sem opcionais", "Tipo A4", 90000 ,4, "nenhuma", "codigoTest1", fileInp1, fileInp2, fileInp3, fileInp4,4, 1);
+		anuncio2 = new Anuncio(23000.50, dataPost, ano_compra, "azul", "sem opcionais", "Tipo A1", 90500 ,4, "nenhuma", "codigoTest2", fileInp1, fileInp2, fileInp3, fileInp4,2, 1);
+		anuncio3 = new Anuncio( 27000.50, dataPost, ano_compra, "azul", "sem opcionais", "sem", 96000 ,4, "nenhuma", "codigoTest3", fileInp1, fileInp2, fileInp3, fileInp4,70, 1);
 	}
 
 	@Test
