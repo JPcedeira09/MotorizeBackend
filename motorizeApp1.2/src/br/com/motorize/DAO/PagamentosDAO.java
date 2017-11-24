@@ -10,13 +10,11 @@ import javax.ws.rs.core.Response;
 import br.com.motorize.exception.SQLExceptions;
 import br.com.motorize.interfaces.PagamentosInterface;
 import br.com.motorize.model.Pagamento;
-import br.com.motorize.utils.ConexaoUtil;
 
 public class PagamentosDAO implements PagamentosInterface{
 
 	@Override
-	public Response AdicionarPagamento(Pagamento pagamento) throws SQLExceptions, ClassNotFoundException, SQLException {
-		Connection connection = ConexaoUtil.getConnection();
+	public Response AdicionarPagamento(Pagamento pagamento, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call adicionar_pagamentos(?,?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setInt(1, pagamento.getId_status());
@@ -25,8 +23,7 @@ public class PagamentosDAO implements PagamentosInterface{
 		return Response.status(200).entity("INFO: Pagamento foi cadastrado com sucesso.").build();
 	}
 	@Override
-	public Pagamento UpdatePagamento(Pagamento pagamento) throws SQLExceptions, ClassNotFoundException, SQLException {
-		Connection connection = ConexaoUtil.getConnection();
+	public Pagamento UpdatePagamento(Pagamento pagamento, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call update_pagamento(?,?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setInt(1, pagamento.getId_status());
@@ -47,8 +44,7 @@ public class PagamentosDAO implements PagamentosInterface{
 	}
 
 	@Override
-	public Pagamento BuscarPagamento(int id_pagamento) throws SQLExceptions, ClassNotFoundException, SQLException {
-		Connection connection = ConexaoUtil.getConnection();
+	public Pagamento BuscarPagamento(int id_pagamento, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call buscar_pagamento(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setInt(1, id_pagamento);

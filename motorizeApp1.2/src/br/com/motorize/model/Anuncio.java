@@ -190,7 +190,6 @@ public class Anuncio implements Serializable{
 		this.imagem_4 = imagem_4;
 	}
 
-
 	public Anuncio(long id_produto, double preco, Date data_postagem, Date ano_compra, String cor, String opcional,
 			String blindagem, long kilometragem, long numero_portas, String tipo_necessidade, String codigo,
 			InputStream imagem_1, InputStream imagem_2, InputStream imagem_3, InputStream imagem_4, long id_carro_fk,
@@ -214,8 +213,6 @@ public class Anuncio implements Serializable{
 		this.id_carro_fk = id_carro_fk;
 		this.id_pessoa_fk = id_pessoa_fk;
 	}
-
-	
 	
 	public Anuncio(double preco, Date data_postagem, Date ano_compra, String cor, String opcional, String blindagem,
 			long kilometragem, long numero_portas, String tipo_necessidade, String codigo, InputStream imagem_1,

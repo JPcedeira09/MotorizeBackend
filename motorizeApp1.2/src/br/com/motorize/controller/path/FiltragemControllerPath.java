@@ -159,7 +159,7 @@ public class FiltragemControllerPath {
 	}
 	
 	@GET
-	@Path("/BuscarCidades/{tipo_veiculo}")
+	@Path("/OrdenarVeiculosPorOrdemNatural/{tipo_veiculo}")
 	public List<Anuncio> OrdenarVeiculosPorOrdemNatural(@PathParam("tipo_veiculo") String tipo_veiculo){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -176,7 +176,7 @@ public class FiltragemControllerPath {
 	}
 	
 	@GET
-	@Path("/BuscarCidades/{tipo_veiculo}")
+	@Path("/OrdenarVeiculosPorMenorValor/{tipo_veiculo}")
 	public List<Anuncio> OrdenarVeiculosPorMenorValor(@PathParam("tipo_veiculo") String tipo_veiculo){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -193,7 +193,7 @@ public class FiltragemControllerPath {
 	}
 	
 	@GET
-	@Path("/BuscarCidades/{tipo_veiculo}")
+	@Path("/OrdenarVeiculosPorMaiorValor/{tipo_veiculo}")
 	public List<Anuncio> OrdenarVeiculosPorMaiorValor(@PathParam("tipo_veiculo") String tipo_veiculo){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -210,7 +210,7 @@ public class FiltragemControllerPath {
 	}
 	
 	@GET
-	@Path("/BuscarCidades/{tipo_veiculo}")
+	@Path("/OrdenarVeiculosPorMenorKilometragem/{tipo_veiculo}")
 	public List<Anuncio> OrdenarVeiculosPorMenorKilometragem(@PathParam("tipo_veiculo") String tipo_veiculo){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -227,7 +227,7 @@ public class FiltragemControllerPath {
 	}
 	
 	@GET
-	@Path("/BuscarCidades/{tipo_veiculo}")
+	@Path("/OrdenarVeiculosPorMaiorKilometragem/{tipo_veiculo}")
 	public List<Anuncio> OrdenarVeiculosPorMaiorKilometragem(@PathParam("tipo_veiculo") String tipo_veiculo){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -244,7 +244,7 @@ public class FiltragemControllerPath {
 	}
 	
 	@GET
-	@Path("/BuscarCidades/{tipo_veiculo}")
+	@Path("/OrdenarVeiculosPorOrdemAlfabeticaAZ/{tipo_veiculo}")
 	public List<Anuncio> OrdenarVeiculosPorOrdemAlfabeticaAZ(@PathParam("tipo_veiculo") String tipo_veiculo){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -261,7 +261,7 @@ public class FiltragemControllerPath {
 	}
 	
 	@GET
-	@Path("/BuscarCidades/{tipo_veiculo}")
+	@Path("/OrdenarVeiculosPorOrdemAlfabeticaZA/{tipo_veiculo}")
 	public List<Anuncio> OrdenarVeiculosPorOrdemAlfabeticaZA(@PathParam("tipo_veiculo") String tipo_veiculo){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -278,7 +278,7 @@ public class FiltragemControllerPath {
 	}
 	
 	@GET
-	@Path("/BuscarCidades/{tipo_veiculo}")
+	@Path("/OrdenarVeiculosPorMaisNovo/{tipo_veiculo}")
 	public List<Anuncio> OrdenarVeiculosPorMaisNovo(@PathParam("tipo_veiculo") String tipo_veiculo){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -295,7 +295,7 @@ public class FiltragemControllerPath {
 	}
 	
 	@GET
-	@Path("/BuscarCidades/{tipo_veiculo}")
+	@Path("/OrdenarVeiculosPorMaisVelho/{tipo_veiculo}")
 	public List<Anuncio> OrdenarVeiculosPorMaisVelho(@PathParam("tipo_veiculo") String tipo_veiculo){
 		try {
 			Connection connection = ConexaoUtil.getConnection();

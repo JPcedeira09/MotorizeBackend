@@ -15,9 +15,25 @@ import br.com.motorize.model.Anuncio;
 import br.com.motorize.model.Cidade;
 import br.com.motorize.model.Estado;
 import br.com.motorize.model.Veiculo;
+import br.com.motorize.utils.ConexaoUtil;
 
 public class FiltragemDAO implements FiltragemInterface{
 
+	public static void main(String[] args) {
+		
+		Connection connection;
+		try {
+			connection = ConexaoUtil.getConnection();
+			new FiltragemDAO().OrdenarVeiculosPorOrdemAlfabeticaAZ("CARRO", connection);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public List<Veiculo> BuscarMarcas(String tipo_veiculo,Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 
