@@ -12,14 +12,12 @@ import javax.ws.rs.core.Response;
 import br.com.motorize.exception.SQLExceptions;
 import br.com.motorize.interfaces.ProdutoInterface;
 import br.com.motorize.model.Produto;
-import br.com.motorize.utils.ConexaoUtil;
 
 public class ProdutoDAO implements ProdutoInterface{
 
 	@Override
-	public Response AdicionarProduto(Produto produto) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public Response AdicionarProduto(Produto produto, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 
-		Connection connection = ConexaoUtil.getConnection();
 		String sqlQuery = "call adicionarProduto(?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 
@@ -43,8 +41,7 @@ public class ProdutoDAO implements ProdutoInterface{
 	}
 
 	@Override
-	public Response DeletarProduto(int id_produto) throws SQLExceptions, ClassNotFoundException, SQLException {
-		Connection connection = ConexaoUtil.getConnection();
+	public Response DeletarProduto(int id_produto, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 
 		String sqlQuery = "call deletarProduto(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
@@ -55,8 +52,7 @@ public class ProdutoDAO implements ProdutoInterface{
 	}
 
 	@Override
-	public Produto BuscarProduto(int id_produto) throws SQLExceptions, ClassNotFoundException, SQLException {
-		Connection connection = ConexaoUtil.getConnection();
+	public Produto BuscarProduto(int id_produto, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call buscarProduto(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setInt(1, id_produto);
@@ -81,8 +77,7 @@ public class ProdutoDAO implements ProdutoInterface{
 
 
 	@Override
-	public List<Produto> BuscarProdutos(int id_pessoa) throws SQLExceptions, ClassNotFoundException, SQLException {
-		Connection connection = ConexaoUtil.getConnection();
+	public List<Produto> BuscarProdutos(int id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call buscarProdutos(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setInt(1, id_pessoa);
@@ -107,12 +102,9 @@ public class ProdutoDAO implements ProdutoInterface{
 		return produtos ;
 	}
 	@Override
-	public Produto UpdateProduto(Produto produto) throws SQLExceptions, ClassNotFoundException, SQLException {
-
-		Connection connection = ConexaoUtil.getConnection();
+	public Produto UpdateProduto(Produto produto, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sql = "call updateProduto(?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = connection.prepareStatement(sql);
-
 		statement.setInt(1, produto.getId_pessoa_prest_fk());
 		statement.setString(2, produto.getNome());
 		statement.setString(3, produto.getCodigo());
@@ -130,7 +122,6 @@ public class ProdutoDAO implements ProdutoInterface{
 		statement2.setInt(1, produto.getId_produto());
 		ResultSet set = statement2.executeQuery(sqlQuery);
 		Produto novo_produto = new Produto();
-
 		while(set.next()){
 			novo_produto.setId_produto(set.getInt("id_produto"));
 			novo_produto.setId_pessoa_prest_fk(set.getInt("id_pessoa_prest_fk"));

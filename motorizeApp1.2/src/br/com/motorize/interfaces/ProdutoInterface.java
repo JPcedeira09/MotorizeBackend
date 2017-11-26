@@ -1,5 +1,6 @@
 package br.com.motorize.interfaces;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ProdutoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Response AdicionarProduto(Produto produto)throws SQLExceptions, ClassNotFoundException, SQLException;
+	Response AdicionarProduto(Produto produto, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
 	
 	/**
 	 * 
@@ -28,7 +29,7 @@ public interface ProdutoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Response DeletarProduto(int id_produto)throws SQLExceptions, ClassNotFoundException, SQLException;
+	Response DeletarProduto(int id_produto, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -38,7 +39,7 @@ public interface ProdutoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Produto BuscarProduto(int id_produto)throws SQLExceptions, ClassNotFoundException, SQLException;
+	Produto BuscarProduto(int id_produto, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
 	
 	/**
 	 * 
@@ -48,7 +49,7 @@ public interface ProdutoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Produto> BuscarProdutos(int id_pessoa) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Produto> BuscarProdutos(int id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 	
 	/**
 	 * 
@@ -58,7 +59,7 @@ public interface ProdutoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Produto UpdateProduto(Produto produto)throws SQLExceptions, ClassNotFoundException, SQLException;
+	Produto UpdateProduto(Produto produto, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
 	
 	
 }
