@@ -1,5 +1,6 @@
 package br.com.motorize.interfaces;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ServicoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Response AdicionarServico(Servico servico)throws SQLExceptions, ClassNotFoundException, SQLException;
+	Response AdicionarServico(Servico servico, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -28,7 +29,7 @@ public interface ServicoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Response DeletarServio(int id_servico)throws SQLExceptions, ClassNotFoundException, SQLException;
+	Response DeletarServio(int id_servico, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -38,7 +39,7 @@ public interface ServicoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Servico BuscarServico(int id_servico)throws SQLExceptions, ClassNotFoundException, SQLException;
+	Servico BuscarServico(int id_servico, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
 	
 	/**
 	 * 
@@ -48,7 +49,7 @@ public interface ServicoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Servico> BuscarServicos(int id_pessoa) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Servico> BuscarServicos(int id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 	/**
 	 * 
 	 * @param servico
@@ -57,6 +58,6 @@ public interface ServicoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Servico UpdateServico(Servico servico)throws SQLExceptions, ClassNotFoundException, SQLException;
+	Servico UpdateServico(Servico servico, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
 
 }

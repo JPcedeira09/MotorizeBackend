@@ -12,13 +12,11 @@ import javax.ws.rs.core.Response;
 import br.com.motorize.exception.SQLExceptions;
 import br.com.motorize.interfaces.ServicoInterface;
 import br.com.motorize.model.Servico;
-import br.com.motorize.utils.ConexaoUtil;
 
 public class ServicoDAO implements ServicoInterface{
 
 	@Override
-	public Response AdicionarServico(Servico servico) throws SQLExceptions, ClassNotFoundException, SQLException {
-		Connection connection = ConexaoUtil.getConnection();
+	public Response AdicionarServico(Servico servico, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call adicionarServico(?,)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 
@@ -42,9 +40,7 @@ public class ServicoDAO implements ServicoInterface{
 	}
 
 	@Override
-	public Response DeletarServio(int id_servico) throws SQLExceptions, ClassNotFoundException, SQLException {
-		Connection connection = ConexaoUtil.getConnection();
-
+	public Response DeletarServio(int id_servico, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call deletarServico(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setInt(1, id_servico);
@@ -54,8 +50,7 @@ public class ServicoDAO implements ServicoInterface{
 	}
 
 	@Override
-	public Servico BuscarServico(int id_servico) throws SQLExceptions, ClassNotFoundException, SQLException {
-		Connection connection = ConexaoUtil.getConnection();
+	public Servico BuscarServico(int id_servico, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call buscarServiço(?)";
 		PreparedStatement statement2 = connection.prepareStatement(sqlQuery);
 		statement2.setInt(1, id_servico);
@@ -80,9 +75,7 @@ public class ServicoDAO implements ServicoInterface{
 
 	}
 	@Override
-	public List<Servico> BuscarServicos(int id_pessoa) throws SQLExceptions, ClassNotFoundException, SQLException {
-		
-		Connection connection = ConexaoUtil.getConnection();
+	public List<Servico> BuscarServicos(int id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call buscarServicos(?)";
 		PreparedStatement statement2 = connection.prepareStatement(sqlQuery);
 		statement2.setInt(1, id_pessoa);
@@ -108,8 +101,7 @@ public class ServicoDAO implements ServicoInterface{
 		return servicos ;
 	}
 	@Override
-	public Servico UpdateServico(Servico servico) throws SQLExceptions, ClassNotFoundException, SQLException {
-		Connection connection = ConexaoUtil.getConnection();
+	public Servico UpdateServico(Servico servico, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sql = "call updateProduto(?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = connection.prepareStatement(sql);
 
