@@ -3,6 +3,7 @@ package br.com.motorize.controller.path;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.ejb.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,6 +20,7 @@ import br.com.motorize.utils.ConexaoUtil;
 @Path("/pagamentos")
 @Consumes("application/json")
 @Produces("application/json")
+@Singleton
 public class PagamentosControllerPath {
 
 	@POST

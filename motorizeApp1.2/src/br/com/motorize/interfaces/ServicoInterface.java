@@ -29,7 +29,7 @@ public interface ServicoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Response DeletarServio(int id_servico, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
+	Response DeletarServico(long id_servico, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
 
 	/**
 	 * 
@@ -39,7 +39,7 @@ public interface ServicoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Servico BuscarServico(int id_servico, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
+	Servico BuscarServico(long id_servico, Connection connection)throws SQLExceptions, ClassNotFoundException, SQLException;
 	
 	/**
 	 * 
@@ -49,7 +49,7 @@ public interface ServicoInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	List<Servico> BuscarServicos(int id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	List<Servico> BuscarServicos(long id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 	/**
 	 * 
 	 * @param servico

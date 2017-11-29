@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.ejb.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,6 +21,7 @@ import br.com.motorize.utils.ConexaoUtil;
 @Path("/filter")
 @Consumes("application/json")
 @Produces("application/json")
+@Singleton
 public class FiltragemControllerPath {
 
 	@GET

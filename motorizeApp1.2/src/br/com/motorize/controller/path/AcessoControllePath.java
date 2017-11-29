@@ -3,6 +3,7 @@ package br.com.motorize.controller.path;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.ejb.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,6 +18,7 @@ import br.com.motorize.utils.ConexaoUtil;
 @Path("/acesso")
 @Produces("application/json")
 @Consumes("application/json")
+@Singleton
 public class AcessoControllePath {
 
 	@GET

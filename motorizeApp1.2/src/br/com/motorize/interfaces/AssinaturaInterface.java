@@ -30,7 +30,7 @@ public abstract interface AssinaturaInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Assinature BuscarAssinatura(int id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	Assinature BuscarAssinatura(long id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 	
 	/**
 	 * 
@@ -52,6 +52,6 @@ public abstract interface AssinaturaInterface {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	Response DeletarAssinatura(int id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
+	Response DeletarAssinatura(long id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException;
 	
 }

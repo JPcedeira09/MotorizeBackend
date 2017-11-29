@@ -3,6 +3,7 @@ package br.com.motorize.controller.path;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.ejb.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,6 +22,7 @@ import br.com.motorize.utils.ConexaoUtil;
 @Path("/endereco")
 @Consumes("application/json")
 @Produces("application/json")
+@Singleton
 public class EnderecoControllePath {
 
 	@POST

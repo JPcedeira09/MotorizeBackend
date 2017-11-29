@@ -58,6 +58,7 @@
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/selenium/guava-23.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/selenium/httpclient-4.5.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/selenium/httpcore-4.4.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/hayway/com.jayway.rest-assured-osgi-1.6.2.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="build/classes"/>

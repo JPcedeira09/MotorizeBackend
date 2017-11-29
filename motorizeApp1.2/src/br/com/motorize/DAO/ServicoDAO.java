@@ -32,7 +32,7 @@ public class ServicoDAO implements ServicoInterface{
 		statement.setString(10, servico.getDiferencial());
 		statement.setString(11, servico.getCodigo());
 
-		statement.execute(sqlQuery);
+		statement.execute();
 		connection.commit();
 		statement.close();
 
@@ -40,23 +40,23 @@ public class ServicoDAO implements ServicoInterface{
 	}
 
 	@Override
-	public Response DeletarServio(int id_servico, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public Response DeletarServico(long id_servico, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call deletarServico(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		statement.setInt(1, id_servico);
-		statement.execute(sqlQuery);
+		statement.setLong(1, id_servico);
+		statement.execute();
 		return Response.status(200).entity("INFO: Servico deletado com sucesso.").build();
 
 	}
 
 	@Override
-	public Servico BuscarServico(int id_servico, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
-		String sqlQuery = "call buscarServiço(?)";
-		PreparedStatement statement2 = connection.prepareStatement(sqlQuery);
-		statement2.setInt(1, id_servico);
-		ResultSet set = statement2.executeQuery(sqlQuery);
+	public Servico BuscarServico(long id_servico, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+		String sqlQuery = "call buscarServico(?)";
+		//TODO ATUALIZAR PROCEDURE DE BUSCAR SERVICO E RETIRAR O "Ç" POR UM "C" SIMPLES.
+		PreparedStatement statement = connection.prepareStatement(sqlQuery);
+		statement.setLong(1, id_servico);
+		ResultSet set = statement.executeQuery();
 		Servico servico = new Servico();
-
 		while(set.next()){
 			servico.setId_serviço(set.getInt("id_serviço"));
 			servico.setId_pessoa_prest_fk(set.getInt("id_pessoa_prest_fk"));
@@ -72,14 +72,14 @@ public class ServicoDAO implements ServicoInterface{
 			servico.setCodigo(set.getString("codigo"));
 		}
 		return servico ;
-
 	}
+	
 	@Override
-	public List<Servico> BuscarServicos(int id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public List<Servico> BuscarServicos(long id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call buscarServicos(?)";
 		PreparedStatement statement2 = connection.prepareStatement(sqlQuery);
-		statement2.setInt(1, id_pessoa);
-		ResultSet set = statement2.executeQuery(sqlQuery);
+		statement2.setLong(1, id_pessoa);
+		ResultSet set = statement2.executeQuery();
 		List<Servico> servicos = new ArrayList<Servico>();
 
 		while(set.next()){
@@ -117,12 +117,12 @@ public class ServicoDAO implements ServicoInterface{
 		statement.setString(11, servico.getDiferencial());
 		statement.setString(11, servico.getCodigo());
 
-		statement.executeQuery(sql);
+		statement.executeQuery();
 
 		String sqlQuery = "call buscarServiço(?)";
 		PreparedStatement statement2 = connection.prepareStatement(sqlQuery);
 		statement2.setInt(1, servico.getId_serviço());
-		ResultSet set = statement2.executeQuery(sqlQuery);
+		ResultSet set = statement2.executeQuery();
 		Servico novo_servico = new Servico();
 
 		while(set.next()){

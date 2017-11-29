@@ -45,12 +45,12 @@ public class AssinaturaDAO implements AssinaturaInterface{
 	 * @throws SQLException
 	 */
 	@Override
-	public Response DeletarAssinatura(int id_pessoa, Connection connection)
+	public Response DeletarAssinatura(long id_pessoa, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
 		
 		String sqlQuery = "call deletar_assinatura(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		statement.setInt(1, id_pessoa);
+		statement.setLong(1, id_pessoa);
 		statement.executeQuery();
 		
 		return Response.status(200).entity("INFO: assinatura deletada com sucesso.").build();
@@ -66,10 +66,10 @@ public class AssinaturaDAO implements AssinaturaInterface{
 	 * @throws SQLException
 	 */
 	@Override
-	public Assinature BuscarAssinatura(int id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
+	public Assinature BuscarAssinatura(long id_pessoa, Connection connection) throws SQLExceptions, ClassNotFoundException, SQLException {
 		String sqlQuery = "call buscar_assinante(?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
-		statement.setInt(1, id_pessoa);
+		statement.setLong(1, id_pessoa);
 		ResultSet set = statement.executeQuery();
 		Assinature assinatura = new Assinature();
 		while (set.next()) {

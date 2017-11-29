@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.ejb.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,6 +25,7 @@ import br.com.motorize.utils.ConexaoUtil;
 @Path("/carros")
 @Consumes("application/json")
 @Produces("application/json")
+@Singleton
 public class AnuncioControllerParh {
 
 	@POST

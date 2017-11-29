@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.ejb.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -16,6 +17,7 @@ import br.com.motorize.utils.ConexaoUtil;
 @Path("/anunciante")
 @Consumes("application/json")
 @Produces("application/json")
+@Singleton
 public class AnuncianteControllerPath {
 
 	@GET

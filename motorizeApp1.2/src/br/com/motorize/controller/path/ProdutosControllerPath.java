@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.ejb.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,6 +22,7 @@ import br.com.motorize.utils.ConexaoUtil;
 @Path("/produtos")
 @Consumes("application/json")
 @Produces("application/json")
+@Singleton
 public class ProdutosControllerPath {
 
 	@POST
@@ -58,7 +60,7 @@ public class ProdutosControllerPath {
 	}
 
 	@GET
-	@Path("BuscarProduto/{id_produto}")
+	@Path("/BuscarProduto/{id_produto}")
 	public Produto BuscarProduto(@PathParam("id_produto") int id_produto){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -75,7 +77,7 @@ public class ProdutosControllerPath {
 	}
 
 	@GET
-	@Path("BuscarProduto/{id_pessoa}")
+	@Path("/BuscarProduto/{id_pessoa}")
 	public List<Produto> BuscarProdutos(@PathParam("id_pessoa") int id_pessoa){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -92,7 +94,7 @@ public class ProdutosControllerPath {
 	}
 
 	@PUT
-	@Path("UpdateProduto/{produto}")
+	@Path("/UpdateProduto/{produto}")
 	public Produto UpdateProduto(Produto produto){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
