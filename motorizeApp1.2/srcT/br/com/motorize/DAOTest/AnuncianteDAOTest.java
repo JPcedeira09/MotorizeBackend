@@ -21,6 +21,7 @@ public class AnuncianteDAOTest {
 	private AnuncianteDAO anuncianteDAO;
 	private Anunciante anuncianteRetorno;
 	private Anunciante anuncianteNovo ;
+	private Anunciante anuncianteNovoD;
 
 	@SuppressWarnings("deprecation")
 	@Before
@@ -30,8 +31,9 @@ public class AnuncianteDAOTest {
 		connection.setAutoCommit(false);
 
 		Date ano_nascimento =  new Date(1996, 9, 9);
-		anunciante = new Anunciante("Joao Paulo", "461.878.888-71", "Jpmotorize09@", ano_nascimento, "42323142", "997485353", "pessoa fisica", "N");
+		anunciante = new Anunciante("Joao Paulo", "461.878.888-71", "Jpmotorize09@", "42323142", "997485353", "pessoa fisica", "N");
 		anuncianteNovo = new Anunciante("Joao Paulo Ferreira", "461.878.888-71", "Jpmotorize09@", ano_nascimento, "42323142", "997485353", "pessoa fisica",1, "N");
+
 	}
 
 	@Test
@@ -51,7 +53,9 @@ public class AnuncianteDAOTest {
 	
 	@Test
 	public void deveDeletarAnunciante() throws SQLExceptions, ClassNotFoundException, SQLException {
-		anuncianteDAO.DeletarAnunciante(anuncianteNovo.getid_pessoa(),connection);
+		anuncianteRetorno = anuncianteDAO.BuscarAnunciante(anunciante.getCPF(), connection);
+
+		anuncianteDAO.DeletarAnunciante(anuncianteRetorno.getid_pessoa(),connection);
 		anuncianteRetorno = anuncianteDAO.BuscarAnunciante(anunciante.getCPF(), connection);
 		Assert.assertNull(anuncianteRetorno.getNome());
 	}

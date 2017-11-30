@@ -1,6 +1,7 @@
 package br.com.motorize.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,19 +14,26 @@ public class AnuncianteDAO implements AnuncianteInteface{
 
 	Connection connection ;
 
+/*	{"nome":"obey",
+		"CPF":"461.555.888-72",
+		"senha":"sennhaTG",
+		"telefone":"4252-3142",
+		"celular":"99555353",
+		"tipo_pessoa":"Fisica",
+		"status":"N"}*/
 	@Override
 	public String AdicionarAnunciante(Anunciante anunciante, Connection connection)
 			throws SQLExceptions, ClassNotFoundException, SQLException {
-		String sqlQuery = "call adicionar_anunciante(?,?,?,?,?,?,?,?)";
+		String sqlQuery = "call adicionar_anunciante(?,?,?,?,?,?,?)";
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setString(1, anunciante.getNome());
 		statement.setString(2, anunciante.getCPF());
 		statement.setString(3, anunciante.getSenha());
-		statement.setDate(4, anunciante.getAno_nascimento());
-		statement.setString(5, anunciante.getTelefone());
-		statement.setString(6, anunciante.getCelular());
-		statement.setString(7, anunciante.getTipo_pessoa());
-		statement.setString(8, anunciante.getStatus());
+		//statement.setString(4, anunciante.getAno_nascimento());
+		statement.setString(4, anunciante.getTelefone());
+		statement.setString(5, anunciante.getCelular());
+		statement.setString(6, anunciante.getTipo_pessoa());
+		statement.setString(7, anunciante.getStatus());
 		statement.executeUpdate();
 		return 	new String("INFO:anunciante cadastrado com sucesso.");
 	}	
@@ -44,11 +52,12 @@ public class AnuncianteDAO implements AnuncianteInteface{
 				anunciante.setNome(set.getString("nome"));
 				anunciante.setCPF(set.getString("CPF"));
 				anunciante.setSenha(set.getString("senha"));
-				anunciante.setAno_nascimento(set.getDate("ano_nascimento"));
+				//anunciante.setAno_nascimento(set.getDate("ano_nascimento"));
 				anunciante.setTelefone(set.getString("telefone"));
 				anunciante.setCelular(set.getString("celular"));
 				anunciante.setTipo_pessoa(set.getString("tipo_pessoa"));
 				anunciante.setid_pessoa(set.getInt("id_pessoa"));
+				anunciante.setStatus(set.getString("Astatus"));
 			}
 			return anunciante;
 		} catch (SQLException e) {
@@ -77,7 +86,7 @@ public class AnuncianteDAO implements AnuncianteInteface{
 		statement.setString(1, anunciante.getNome());
 		statement.setString(2, anunciante.getCPF());
 		statement.setString(3, anunciante.getSenha());
-		statement.setDate(4, anunciante.getAno_nascimento());
+		statement.setDate(4, (Date) anunciante.getAno_nascimento());
 		statement.setString(5, anunciante.getTelefone());
 		statement.setString(6, anunciante.getCelular());
 		statement.setString(7, anunciante.getTipo_pessoa());

@@ -1,7 +1,7 @@
 package br.com.motorize.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -146,6 +146,30 @@ public class Anunciante implements Serializable{
 		this.status = status;
 	}
 	
+	
+	/**
+	 * Esse inicializador é para Cadastro aonde não é preciso sem id e sem data nascimento
+	 * pois ele é uma chave primaria auto incremental não precisa ser adicionado com valor;
+	 * @param nome
+	 * @param cPF
+	 * @param senha
+	 * @param telefone
+	 * @param celular
+	 * @param tipo_pessoa
+	 * @param status
+	 */
+	public Anunciante(String nome, String cPF, String senha, String telefone, String celular,
+			String tipo_pessoa, String status) {
+		super();
+		
+		this.nome = nome;
+		this.CPF = cPF;
+		this.senha = senha;
+		this.telefone = telefone;
+		this.celular = celular;
+		this.tipo_pessoa = tipo_pessoa;
+		this.status = status;
+	}
 	public String toJson() {
 		return new Gson().toJson(this);
 	}

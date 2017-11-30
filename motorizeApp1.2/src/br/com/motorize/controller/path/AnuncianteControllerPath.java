@@ -1,6 +1,5 @@
 package br.com.motorize.controller.path;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,6 +25,8 @@ import br.com.motorize.utils.ConexaoUtil;
 @Singleton
 public class AnuncianteControllerPath {
 
+	
+	// curl -d "{"nome":"obey","CPF":"461.555.888-72","senha":"sennhaTG","telefone":"4252-3142","celular":"99555353","tipo_pessoa":"Fisica","status":"N"}" http://localhost:8088/motorizeApp1.2/motorize/anunciante/adicionarAnunciante
 	@GET
 	@Path("/sayHello")
 	public String sayHello() {
@@ -34,13 +35,15 @@ public class AnuncianteControllerPath {
 
 	@POST
 	@Path("/adicionarAnunciante")
+    @Consumes(MediaType.APPLICATION_JSON)
 	public Response AdicionarAnunciante(Anunciante anunciante) throws URISyntaxException{
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			String response = new AnuncianteDAO().AdicionarAnunciante(anunciante, connection);
-			URI uri = new URI("/anunciante/BuscarAnunciante/"+anunciante.getCPF());
+			//URI uri = new URI("/anunciante/BuscarAnunciante/"+anunciante.getCPF());
 			System.out.println(response);
-			return Response.created(uri).status(200).entity(anunciante).type(MediaType.APPLICATION_JSON_TYPE).build();
+			//created(uri).
+			return Response.status(200).entity("INFO:adicionado com sucesso").build();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,6 +57,7 @@ public class AnuncianteControllerPath {
 
 	@GET
 	@Path("/buscarAnunciante/{CPF}")
+    @Produces(MediaType.APPLICATION_JSON)
 	public Anunciante BuscarAnunciante(@PathParam("CPF")String CPF){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
@@ -68,7 +72,11 @@ public class AnuncianteControllerPath {
 			return null;
 		}		
 	}
+	
+	// http://localhost:8088/motorizeApp1.2/motorize/anunciante/adicionarAnunciante
 
+	//{"cpf":"461.878.888-73","nome":"obey","CPF":"461.555.888-72","senha":"sennhaTG","ano_nascimento":"1966-09-09","telefone":"4252-3142","celular":"99555353","tipo_pessoa":"Fisica","status":"N"}
+	
 	@DELETE
 	@Path("/deletarAnunciante/{id_pessoa}")
 	public Response DeletarAnunciante(@PathParam("id_pessoa")long id_pessoa){
