@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import br.com.motorize.DAO.AnuncianteDAO;
 import br.com.motorize.model.Anunciante;
+import br.com.motorize.model.GenericResponse;
 import br.com.motorize.utils.ConexaoUtil;
 
 @Path("/anunciante")
@@ -45,32 +46,33 @@ public class AnuncianteControllerPath {
 			//created(uri).
 			return Response.status(200).entity("INFO:adicionado com sucesso").build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
-		}	
+			return Response.status(200).entity(generic.toJson()).build();
+		}
 	}
 
 	@GET
 	@Path("/buscarAnunciante/{CPF}")
     @Produces(MediaType.APPLICATION_JSON)
-	public Anunciante BuscarAnunciante(@PathParam("CPF")String CPF){
+	public Response BuscarAnunciante(@PathParam("CPF")String CPF){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
-			return new AnuncianteDAO().BuscarAnunciante(CPF, connection);
+			 Anunciante anunciante = new AnuncianteDAO().BuscarAnunciante(CPF, connection);
+				return Response.status(200).entity(anunciante.toJson()).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
-		}		
+			return Response.status(200).entity(generic.toJson()).build();
+		}
 	}
 	
 	// http://localhost:8088/motorizeApp1.2/motorize/anunciante/adicionarAnunciante
@@ -85,14 +87,14 @@ public class AnuncianteControllerPath {
 			String response = new AnuncianteDAO().DeletarAnunciante(id_pessoa, connection);
 			return Response.status(200).entity(response).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
-		}	
+			return Response.status(200).entity(generic.toJson()).build();
+		}
 	}
 
 }

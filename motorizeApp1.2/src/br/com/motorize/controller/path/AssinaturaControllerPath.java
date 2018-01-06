@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import br.com.motorize.DAO.AssinaturaDAO;
 import br.com.motorize.model.Assinature;
+import br.com.motorize.model.GenericResponse;
 import br.com.motorize.utils.ConexaoUtil;
 
 @Path("/assinatura")
@@ -26,71 +27,77 @@ public class AssinaturaControllerPath {
 
 
 	@POST
-	@Path("/AdicionarAssinatura")
+	@Path("/adicionarAssinatura")
 	public Response AdicionarAssinatura(Assinature assinatura){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
-			return new AssinaturaDAO().AdicionarAssinatura(assinatura,connection);
+			new AssinaturaDAO().AdicionarAssinatura(assinatura,connection);
+			GenericResponse generic = new GenericResponse(true, "iNFO: assinatura adicionada com sucesso", 201);
+			return Response.status(200).entity(generic.toJson()).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		}
 	}
 
 	@DELETE
-	@Path("/AdicionarAssinatura/{id_pessoa}")
+	@Path("/adicionarAssinatura/{id_pessoa}")
 	public Response DeletarAssinatura(@PathParam("id_pessoa")long id_pessoa){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
-			return new AssinaturaDAO().DeletarAssinatura(id_pessoa,connection);
+			new AssinaturaDAO().DeletarAssinatura(id_pessoa,connection);
+			GenericResponse generic = new GenericResponse(true, "iNFO: assinatura deletada com sucesso", 200);
+			return Response.status(200).entity(generic.toJson()).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		}
 	}
-	
+
 	@GET
-	@Path("/BuscarAssinatura/{id_pessoa}")
-	public Assinature BuscarAssinatura(@PathParam("id_pessoa")long id_pessoa){
+	@Path("/buscarAssinatura/{id_pessoa}")
+	public Response BuscarAssinatura(@PathParam("id_pessoa")long id_pessoa){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
-			return new AssinaturaDAO().BuscarAssinatura(id_pessoa,connection);
+			Assinature assinatura =  new AssinaturaDAO().BuscarAssinatura(id_pessoa,connection);
+			return Response.status(200).entity(assinatura.toJson()).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		}
 	}
-	
-	@PUT
-	@Path("/AtualizarAssinatura")
-		public Assinature AtualizarAssinatura(Assinature assinatura){
-			try {
-				Connection connection = ConexaoUtil.getConnection();
-				return new AssinaturaDAO().AtualizarAssinatura(assinatura,connection);
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null;
-			}
-		}
 
+	@PUT
+	@Path("/atualizarAssinatura")
+	public Response AtualizarAssinatura(Assinature assinatura){
+		try {
+			Connection connection = ConexaoUtil.getConnection();
+			Assinature assinature = new AssinaturaDAO().AtualizarAssinatura(assinatura,connection);
+			return Response.status(200).entity(assinature.toJson()).build();
+		} catch (ClassNotFoundException e) {
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
+			e.printStackTrace();
+			return Response.status(200).entity(generic.toJson()).build();
+		} catch (SQLException e) {
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
+			e.printStackTrace();
+			return Response.status(200).entity(generic.toJson()).build();
+		}
 	}
+
+}

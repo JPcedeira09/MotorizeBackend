@@ -110,8 +110,8 @@ public class FiltragemControllerPath {
 	}
 
 	@GET
-	@Path("/BuscarCidade")
-	public Cidade BuscarCidade(int id_cidade){
+	@Path("/BuscarCidade/{id_cidade}")
+	public Cidade BuscarCidade(@PathParam("id_cidade") int id_cidade){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			return new FiltragemDAO().BuscarCidade(id_cidade, connection);

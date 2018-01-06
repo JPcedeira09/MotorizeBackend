@@ -14,6 +14,7 @@ public class AnuncianteCompleto implements Serializable{
 	private Cidade cidade ;
 	private Estado estado ;
 	private Email email ;
+	
 	private Assinature Assinature ;
 	public Anunciante getAnunciante() {
 		return anunciante;

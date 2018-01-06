@@ -26,7 +26,7 @@ import br.com.motorize.utils.ConexaoUtil;
 public class EnderecoControllePath {
 
 	@POST
-	@Path("/AdiconarEndereco")
+	@Path("/adiconarEndereco")
 	public Response AdiconarEndereco(Endereco endereco) {
 		Connection connection;
 		try {
@@ -34,32 +34,32 @@ public class EnderecoControllePath {
 			GenericResponse response = new EnderecoDAO().AdiconarEndereco(endereco, connection);
 			return Response.status(200).entity(response.toJson()).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(500).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
+			return Response.status(500).entity(generic.toJson()).build();
 		}
 	}
 
 	@PUT
 	@Path("/UpdateEndereco")
-	public Endereco UpdateEndereco(Endereco endereco){
+	public Response UpdateEndereco(Endereco endereco){
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			Endereco retorno = new EnderecoDAO().UpdateEndereco(endereco, connection);
-			return retorno;
+			return Response.status(200).entity(retorno.toJson()).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(500).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
-		}	
+			return Response.status(500).entity(generic.toJson()).build();
+		}
 	}
 
 	@DELETE
@@ -70,31 +70,31 @@ public class EnderecoControllePath {
 			GenericResponse response = new EnderecoDAO().DeletarEndereco(id_pessoa_fk, connection);
 			return Response.status(204).entity(response.toJson()).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(500).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
+			return Response.status(500).entity(generic.toJson()).build();
 		}
 	}
 
 	@GET
 	@Path("/BuscarEndereco/{id_pessoa_fk}")
-	public Endereco BuscarEndereco(@PathParam("id_pessoa_fk") long id_pessoa_fk)  {
+	public Response BuscarEndereco(@PathParam("id_pessoa_fk") long id_pessoa_fk)  {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			Endereco retorno = new EnderecoDAO().BuscarEndereco(id_pessoa_fk, connection);
-			return retorno;
+			return Response.status(200).entity(retorno.toJson()).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(500).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
+			return Response.status(500).entity(generic.toJson()).build();
 		}
 	}
 

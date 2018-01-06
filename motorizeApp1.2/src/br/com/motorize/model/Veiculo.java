@@ -29,7 +29,6 @@ public class Veiculo implements Serializable{
 	@XmlAttribute(name = "tipo_veiculo")
 	private String tipo_veiculo;
 	
-	
 	public int getId_carro() {
 		return id_carro;
 	}
@@ -60,6 +59,7 @@ public class Veiculo implements Serializable{
 	public void setTipo_veiculo(String tipo_veiculo) {
 		this.tipo_veiculo = tipo_veiculo;
 	}
+	
 	/**
 	 * @param id_carro
 	 * @param marca
@@ -88,4 +88,6 @@ public class Veiculo implements Serializable{
 		return new Gson().toJson(this);
 	}
 	
+	
+
 }

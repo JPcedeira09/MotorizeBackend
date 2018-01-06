@@ -15,7 +15,7 @@ public class GenericResponse {
 	private String message;
 	
 	@XmlAttribute(name="errorCode")
-	private String errorCode;
+	private int errorCode;
 	
 	public boolean isStatus() {
 		return status;
@@ -29,14 +29,14 @@ public class GenericResponse {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getErrorCode() {
+	public int getErrorCode() {
 		return errorCode;
 	}
-	public void setErrorCode(String errorCode) {
+	public void setErrorCode(int errorCode) {
 		this.errorCode = errorCode;
 	}
 	
-	public GenericResponse(boolean status, String message, String errorCode) {
+	public GenericResponse(boolean status, String message, int errorCode) {
 		super();
 		this.status = status;
 		this.message = message;

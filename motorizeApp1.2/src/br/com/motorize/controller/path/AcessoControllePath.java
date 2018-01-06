@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 import br.com.motorize.DAO.AcessoDAO;
 import br.com.motorize.model.Anunciante;
+import br.com.motorize.model.GenericResponse;
 import br.com.motorize.utils.ConexaoUtil;
 
 @Path("/acesso")
@@ -24,9 +25,9 @@ public class AcessoControllePath {
 	@GET
 	@Path("/teste")
 	public Response teste()  {
-	return Response.status(200).entity("Servidor Online").build();
+		return Response.status(200).entity("Servidor Online").build();
 	}
-	
+
 	@GET
 	@Path("/Acesso/{CPF}/{senha}")
 	public Response Acesso(@PathParam("CPF") String CPF, @PathParam("senha") String senha)  {
@@ -37,49 +38,49 @@ public class AcessoControllePath {
 			System.out.println(anunciante.toJson());
 			return Response.status(200).entity(anunciante.toJson()).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		}
 	}
 
 	@GET
 	@Path("/Login/{CPF}/{senha}")
-	public Anunciante Login(@PathParam("CPF") String CPF, @PathParam("senha") String senha) {
+	public Response Login(@PathParam("CPF") String CPF, @PathParam("senha") String senha) {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			Anunciante anunciante = new AcessoDAO().Login(CPF, senha, connection);
-			return anunciante;
+			return Response.status(200).entity(anunciante.toJson()).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		}	
 	}
 
 	@GET
 	@Path("/Logou/{CPF}")
-	public Anunciante Logout(@PathParam("CPF")String CPF) {
+	public Response Logout(@PathParam("CPF")String CPF) {
 		try {
 			Connection connection = ConexaoUtil.getConnection();
 			Anunciante anunciante = new AcessoDAO().Logout(CPF , connection);
-			return anunciante;
+			return Response.status(200).entity(anunciante.toJson()).build();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "ClassNotFoundException", 404);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			GenericResponse generic = new GenericResponse(false, "SQLException", 500);
 			e.printStackTrace();
-			return null;
+			return Response.status(200).entity(generic.toJson()).build();
 		}
 	}
 

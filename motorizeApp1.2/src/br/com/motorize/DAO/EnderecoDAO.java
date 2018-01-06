@@ -32,7 +32,7 @@ public class EnderecoDAO implements EnderecoInterface{
 		statement.setString(5, endereco.getNumero());
 		statement.setString(6, endereco.getComplemento());
 		statement.executeQuery();
-		GenericResponse response = new GenericResponse(true, "INFO:Criado com sucesso.", "none");
+		GenericResponse response = new GenericResponse(true, "INFO: endereço foi criado com sucesso.", 200);
 		return response;
 	}
 
@@ -89,7 +89,7 @@ public class EnderecoDAO implements EnderecoInterface{
 		PreparedStatement statement = connection.prepareStatement(sqlQuery);
 		statement.setLong(1, id_pessoa_fk);
 		statement.executeQuery();
-		GenericResponse response = new GenericResponse(true, "INFO:Deletado com sucesso", "none");
+		GenericResponse response = new GenericResponse(true, "INFO:endereco foi deletado com sucesso", 200);
 		return response;
 	}
 	
