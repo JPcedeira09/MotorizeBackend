@@ -15,7 +15,6 @@ public class ConexaoUtil  {
 	 * Retorna uma nova conexão caso não haja nenhuma intancia com o banco de dados ;
 	 * */
 		public static ConexaoUtil getInstance(){
-			
 			if (conexaoUtil == null ){
 				conexaoUtil = new ConexaoUtil();
 			}
@@ -23,7 +22,7 @@ public class ConexaoUtil  {
 		}
 
 		/*
-		 * Retorna conexão com o banco de dados speds;
+		 * Retorna conexão com o banco de dados;
 		 * */
 		public static Connection getConnection() throws SQLException, ClassNotFoundException {
 			Class.forName("com.mysql.jdbc.Driver");
